@@ -13,7 +13,7 @@ Still under development phase.
 
 Semantics:
 
-1. Keywords: if, elif, else, while, print
+1. Keywords: if, elif, else, while, print, for
 
 2. Vocabulary
  
@@ -27,6 +27,7 @@ Semantics:
 "print":="likh"/"bol"/"dikha"
 
 "while":= "jabtak"/"jbtk"/"jabtk"/"jbtak"
+"for":= "hr"
 
 For any re-assignment operations, 
 

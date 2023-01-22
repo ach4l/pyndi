@@ -21,10 +21,10 @@ text_file = open(filename, "r")
 code_pyndi = text_file.read() 
 #close file
 text_file.close()
-#print("Pyndi Code")
-#print(code_pyndi)
+print("Pyndi Code")
+print(code_pyndi)
 
-keyword_list=['if','elif','else:','while','print'];
+keyword_list=['if','elif','else:','while','print','for'];
 
 # All the translation happens here
 # print statement
@@ -43,7 +43,36 @@ code_python = code_python.replace("nahin to","else")
 #while loop
 code_python = code_python.replace("jbtk","while")
 
+
+
+#for_numbers
+
+
+
+
+
+# for_loop_numbers
+
+
+code_python_list=code_python.splitlines()
+line_list_for=[]
+for line in code_python_list:
+    if 'hr' in line:
+        word_list=line.strip().split(' ')
+        hr_index=word_list.index('hr')
+        var=word_list[hr_index+1]
+        low_limit=word_list[0]
+        upp_limit=word_list[3]
+        line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'   
+        print("forforforforfor")
+        print(line)
+        print("forforforforfor")
+    line_list_for.append(line)
  
+code_python = "\n".join(line_list_for) 
+print("FOR CODE PYTHON FOR CODE PYTHON FOR CODE PYTHON")
+print(code_python)
+print("FOR CODE PYTHON FOR CODE PYTHON FOR CODE PYTHON")  
 #line-segmentation-while
 code_python_lines=code_python.splitlines()
 line_list_while = []
@@ -92,8 +121,6 @@ for line in code_python_lines:
 code_python = "\n".join(line_list_while)            
         
         
-
-
 
 
 # comparison operators
