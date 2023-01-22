@@ -18,11 +18,39 @@ print(code_pyndi)
 # All the translation happens here
 # print statement
 code_python = code_pyndi.replace("likh","print")
+code_python = code_python.replace("bol","print")
+code_python = code_python.replace("dikha","print")
+
 # if conditions
 code_python = code_python.replace("nahin to agar","elif")
 code_python = code_python.replace("agar","if")
+code_python = code_python.replace("agr","if")
+code_python = code_python.replace("ydi","if")
+code_python = code_python.replace("yadi","if")
 code_python = code_python.replace("nahin to","else")
-# for loop
+
+
+
+
+# comparison operators
+
+code_python_lines=code_python.splitlines()
+print(code_python_lines)
+line_list = []
+for line in code_python_lines:
+    if line[0:2] == 'if':
+        print("******************************************")
+        print(line)
+        if ("barabar h" in line):
+            line=line.replace("barabar h",'==')
+        if line.count(':')==0:
+            line=line+':'
+        if  line.count('=')==1:
+            line=line.replace("=","==")
+    line_list.append(line)
+ 
+
+code_python_corrected = "\n".join(line_list)
 
 # Final Python code
 print("Python Code")
