@@ -176,7 +176,6 @@ except Exception as e:
     print("Kuch to Gadbad hai...")
     error_message = error_message.replace("Traceback (most recent call last)","Aapke code mein yahan galti hai")
     error_message = error_message.replace('File "<string>", ',"")
-    #error_message = error_message.replace('if',"agar")
+    error_message = error_message.replace('if',"agar")
     error_message_list = error_message.splitlines(True)
-    error_message_list = error
     print(error_message)
