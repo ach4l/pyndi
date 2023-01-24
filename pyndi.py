@@ -167,12 +167,16 @@ py_file.close()
 
 
 # Executing the translated python code
-print("RESULT!")
+print("Code chalane pe ye mila")
 try:
-    exec(code_python_corrected)
+    exec(code_python)
 # Catching the errors as exceptions. Need to translate the errors. 
-except Exception as e:
-    print("ERROR")
-    print(e)
-    print("ERROR LINE")
-    traceback.print_exc()
+except Exception as e:    
+    error_message = traceback.format_exc()
+    print("Kuch to Gadbad hai...")
+    error_message = error_message.replace("Traceback (most recent call last)","Aapke code mein yahan galti hai")
+    error_message = error_message.replace('File "<string>", ',"")
+    #error_message = error_message.replace('if',"agar")
+    error_message_list = error_message.splitlines(True)
+    error_message_list = error
+    print(error_message)
