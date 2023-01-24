@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyndi</title>
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+</head>
+<body>
+    <div class="navbar"></div>
+    <div class="body">
+        <div class="logo"></div>
+        <div class="playground">
+            <div class="usercode">
+                <div class="controls">
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mr-3 mt-5">Save</button>
+                    <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mr-3 mt-5" id="run-trigger">Run</button>
+                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full mt-5">Download</button>
+
+                </div>
+                <br>
+                <hr>
+                <div class="codearea">
+                    <textarea name="usercode-codearea" id="usercode-codearea" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="result">
+                <div class="controls">
+                </div>
+                <div class="resultarea">
+                    <textarea name="usercode-result"
+                     id="usercode-result" cols="30" rows="10"></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer"></div>
+    <script src="./script.js"></script>
+</body>
+</html>
