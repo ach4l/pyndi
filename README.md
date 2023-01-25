@@ -11,6 +11,11 @@ Still under development phase.
 
 
 
+
+
+Minor semantics:
+1. user may write agar or agr, not going to make a difference, nahin/nhi/nahi; jbtk/jabtk/jbtak all interpreted identically.
+
 Semantics:
 
 1. Keywords: if, elif, else, while, print, for
