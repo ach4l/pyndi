@@ -56,11 +56,12 @@ enableTab("editor");
                                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path></svg>
                                 <span class="sr-only">Attach file</span>
                             </button>
+                            <form name="code_pyndi">
                             <button type="button" id="run" onclick="send_code()" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"> <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/> </svg>
                                 <span class="sr-only">Code Chalao</span>
                             </button>
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
+                            <button class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
                                 <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
                                 <span class="sr-only">Upload image</span>
                             </button>
@@ -88,10 +89,12 @@ enableTab("editor");
                         <div class="tooltip-arrow" data-popper-arrow></div>
                     </div>
                 </div>
+                
                 <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
                     <label for="editor" class="sr-only">Code Chalao</label>
-                    <textarea id="editor" rows="20" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Yahan pyndi code likho" required></textarea>
+                    <textarea form="code_pyndi" name='editor' id="editor" rows="20" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Yahan pyndi code likho" required></textarea>
                 </div>
+                </form>
             </div>
             
         
@@ -110,12 +113,13 @@ enableTab("editor");
     
     
   <script>
-    function send_code(){
-        $.post("https://ach4l.pythonanywhere.com/pyndi",
+    function send_code(){    
+        code_pyndi = document.getElementById("editor").value    
+        $.post("http://ach4l.pythonanywhere.com/pyndi",
         {
-          code_python: $('editor').val(),
           contentType: 'application/json;charset=UTF-8',
-         
+          data: {"code_pyndi":code_pyndi},
+          dataType: 'json'         
         },
         function(data,status){
           document.getElementById("message").value= data;;
