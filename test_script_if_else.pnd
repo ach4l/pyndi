@@ -1,8 +1,8 @@
 likh("Hello World")
 a = 0
-agar a == 3
+agr a == 3
     likh("Teen tigada kaam bigada")
-nahin to agar a == 0:
+nahi to agar a == 0:
     likh("Main Shoonya pe sawar hoon")
-nahin to:
+nhin to:
     likh("Dekh raha hai binod?")
