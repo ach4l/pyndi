@@ -115,7 +115,7 @@ enableTab("editor");
   <script>
     function send_code(){    
         code_pyndi = document.getElementById("editor").value    
-        $.post("http://ach4l.pythonanywhere.com/pyndi",
+        $.post("https://ach4l.pythonanywhere.com/pyndi",
         {
           contentType: 'application/json;charset=UTF-8',
           data: {"code_pyndi":code_pyndi},
