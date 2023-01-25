@@ -1,7 +1,7 @@
-a=1
-while a < 10: 
+a=40
+while a < 100: 
 	print(a)
-	if a = 5:
+	if a == 8:
             a=a*3
 	else:
-            a=a+1
+            a=a+10

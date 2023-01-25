@@ -21,17 +21,35 @@ text_file.close()
 keyword_list=['if','elif','else:','while','print','for']
 
 def translate_keywords(code_pyndi):
+
+
+
     # All the translation happens here
+
+
+
+
+     #minor_translations_(similar_words_into_one_convention)
+    #maybe a better idea is to use arrays to handle them
+    code_python = code_pyndi.replace("jabtk","jbtk")
+    code_python = code_python.replace("jbtak","jbtk")
+    code_python = code_python.replace("jabtak","jbtk")
+    code_python = code_python.replace("agr","agar")
+    code_python = code_python.replace("nhi to","nahin to")
+    code_python = code_python.replace("nhin to","nahin to")
+    code_python = code_python.replace("nahi to","nahin to")
+    code_python = code_python.replace("naahi to","nahin to")
+    code_python = code_python.replace("ydi","yadi")
+    code_python = code_python.replace("har","hr")
+    code_python = code_python.replace("lekar","lekr")
     # print statement
-    code_python = code_pyndi.replace("likh","print")
+    code_python = code_python.replace("likh","print")
     code_python = code_python.replace("bol","print")
     code_python = code_python.replace("dikha","print")
 
     # if else conditions
     code_python = code_python.replace("nahin to agar","elif")
     code_python = code_python.replace("agar","if")
-    code_python = code_python.replace("agr","if")
-    code_python = code_python.replace("ydi","if")
     code_python = code_python.replace("yadi","if")
     code_python = code_python.replace("nahin to","else")
 
@@ -40,7 +58,6 @@ def translate_keywords(code_pyndi):
     return code_python
 
 code_python = translate_keywords(code_pyndi)
-
 
 # for_loop_numbers
 
@@ -119,11 +136,11 @@ def syntax_simplifier(code_python):
             if line.count(':')==0:
                 line=line+':'
         line_list.append(line)
+	  
     code_python = "\n".join(line_list)
     return(code_python)
 
 code_python = syntax_simplifier(code_python)
-
 # Final Python code
 print("Final Python Code")
 print(code_python)
