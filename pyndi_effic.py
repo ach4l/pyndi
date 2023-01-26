@@ -92,7 +92,6 @@ code_python = translate_keywords(code_pyndi)
 
 #making_efficient_by_performing_splitting_only_once
 
-# for_loop_numbers
 def for_and_dec_op_syntax_simpli(code_python):
     """
     this function takes 'translated' pyndi code and processes for loop
@@ -102,57 +101,82 @@ def for_and_dec_op_syntax_simpli(code_python):
     then deciphers the operations and operands present in all the lines
     finally some syntax simplification stuff
     """     
-    code_python_list=code_python.splitlines()
-    line_list=[]
+    
+    code_python_list=code_python.splitlines()                                          # extracting_lines
+    line_list=[]                                                                        #collect lines in line_list
+    
+    #line-wise processing starts here
+    
     for line in code_python_list:
-        if 'hr' in line:
-            word_list=line.strip().split(' ')
-            hr_index=word_list.index('hr')
+        
+        #### handling if statement----starts
+        
+        if 'hr' in line:                                                            #seeking if it has 'hr'; if so it has to be 'if' statement
+            word_list=line.strip().split(' ')                                       #splitting line
+            hr_index=word_list.index('hr')                                          #where is 'hr'?
             var=word_list[hr_index+1]
-            low_limit=word_list[0]
-            upp_limit=word_list[3]
-            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'    
-        first_word = line.strip().split(" ")[0]        
-# if these three conditions are not met, we assume that the line contains statement for updating a variable
-        if (first_word not in keyword_list):
-            if ('=' not in line):
-                if "print" not in line:
+            low_limit=word_list[0]                                                  #extracting the lower_limit of variable
+            upp_limit=word_list[3]                                                  #extracting the upper_limit of variable
+            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'           #rephrasing line as a standard python code
+       #### handling if statement----ends
+            
+        ####deciphering operations and operands-----starts
+        first_word = line.strip().split(" ")[0]                                     #extracting first string in line    
+    
+    
+    
+           ### if these three conditions are not met, we assume that the line contains statement for updating a variable
+    
+        if (first_word not in keyword_list):                                        ## (1) first word is not a keyword
+            if ('=' not in line):                                                   ## (2) no assignment/comparison present
+                if "print" not in line:                                             ##(3) no print statement
                     # Need number of spaces to keep track of indentation
                     # currently only works when indentation is done using tab
-                    number_of_spaces = len(line) - len(line.lstrip())
-                    # var is the variable and r_var is the number by which it needs to be updated by            
-                    r_var=line.strip().split(" ")[2]                            
-                    var=first_word
-                    # reassignment can be of four types, add subtract multiply or divide                
-                    if 'bdhaao'in line:
-                        line = var + '=' + var + '+' + r_var
-                    elif 'ghtaao'in line:
-                        line = var + '=' + var + '-' + r_var
-                    elif 'guna'in line:
-                        line = var + '=' + var + '*' + r_var
-                    elif 'bhag' in line or 'bhaag' in line:
-                        if (r_var=="0"):
-             #               print('@@@@@@@@@@@@@@@@@@@@@')
-                            print("maaf kijiye, 0 se bhaag nhi krste")
-              #              print('@@@@@@@@@@@@@@@@@@@@@')
-                            line = var + '=' + var + '/' + r_var
+                    number_of_spaces = len(line) - len(line.lstrip())               #indentation thing
+                    ## var is the variable and r_var is the number by which it needs to be updated by
+                    ## assuming semantic-rule is followed (specified in readme)
+                    r_var=line.strip().split(" ")[2]                                #extracting r_var                     
+                    var=first_word                                                  #extracting var
+                    # updation can be of four types, add subtract multiply or divide                
+                    if 'bdhaao'in line:                                             #addition
+                        line = var + '=' + var + '+' + r_var                        #rephrasing line as a standard python code
+                    elif 'ghtaao'in line:                                           #subtraction
+                        line = var + '=' + var + '-' + r_var                        #rephrasing line as a standard python code          
+                    elif 'guna'in line:                                             #multiplication
+                        line = var + '=' + var + '*' + r_var                        #rephrasing line as a standard python code
+                    elif 'bhag' in line or 'bhaag' in line:                         #divison
+                        if (r_var=="0"):                                                                        
+                            print("maaf kijiye, 0 se bhaag nhi krste")              #divison by zero error
+                            line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
                         else:
-                            line = var + '=' + var + '/' + r_var
+                            line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
                     else:
-                        print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do")
-                    line =  ' '*number_of_spaces*6+line
-        if 'if' in line:
+                        print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do") #if user does not follow semantic-rule
+                    line =  ' '*number_of_spaces*6+line                             #indentation thing
+        ####deciphering operations and operands-----ends
+        
+        
+                    
+        ####handling minor syntax things in if statement---starts
+        
+        ###(based on the observation that only comparison operator should follow if/elif statements)  
+          
+        if 'if' in line:                                                    
             # comparison operator two different ways      
             if ("barabar h" in line):
                 line=line.replace("barabar h",'==')
             if  line.count('=')==1:
                 line=line.replace("=","==")
-        # Removing the need for colon in if for and while statements
+                
+        ### Removing the need for colon in if, for and while statements
         if 'for' in line or 'while' in line or 'if' in line or 'elif' in line or 'else' in line:
             if line.count(':')==0:
                 line=line+':'
-        line_list.append(line)       
-    code_python = "\n".join(line_list)
+                
+       ####handling minor syntax things in if statement---ends
+       
+        line_list.append(line)                                                  #appending the modified line to line_list
+    code_python = "\n".join(line_list)                                          #code in python!!!
     return code_python
 
 code_python = for_and_dec_op_syntax_simpli(code_python)
