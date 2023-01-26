@@ -1,3 +1,13 @@
+1 se lekr 10 tk hr sankhya k liye
+	dikha(sankhya*sankhya)
+	dikha(sankhya+10)
+sankhya=1
+jabtak sankhya < 5: 
+	dikha(sankhya)
+	agr sankhya = 5:
+		sankhya ko 3  se guna
+	nhi to:
+		sankhya ko 1 se bdha
 sankhyaa=2
 for sankhyaa in range(1,10):
 	print(sankhyaa*sankhyaa)
@@ -13,6 +23,14 @@ number=10
 print(number)
 j=6
 print(j)
+likh("Hello World")
+a = 0
+agr a == 3
+    likh("Teen tigada kaam bigada")
+nahi to agar a == 0:
+    likh("Main Shoonya pe sawar hoon")
+nhin to:
+    likh("Dekh raha hai binod?")
 for sankhya in range(1,10):
 	print(sankhya*sankhya)
 	print(sankhya+10)
