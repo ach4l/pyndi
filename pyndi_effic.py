@@ -2,6 +2,7 @@
 import sys
 import time
 import re
+import traceback
 
 # reading filename from the system arguments coming from command line
 n = len(sys.argv)
@@ -206,9 +207,18 @@ try:
 # Catching the errors as exceptions. Need to translate the errors. 
 except Exception as e:    
     error_message = traceback.format_exc()
-    print("Kuch to Gadbad hai...")
-    error_message = error_message.replace("Traceback (most recent call last)","Aapke code mein yahan galti hai")
+    error_message = error_message.replace("Traceback (most recent call last):","😟 Kuch to gadbad hai. Daya, pata karo!")
     error_message = error_message.replace('File "<string>", ',"")
-    error_message = error_message.replace('if',"agar")
     error_message_list = error_message.splitlines(True)
+    error_message_list.pop(1)
+    error_message_list.pop(1)
+    error_line_list=[]
+    for line in error_message_list:
+        if "line" in line:
+            line_no = line.lstrip().split(" ")[1]
+            line_no = line_no[:-1]
+            line = "Gadbad shayad line " + line_no + " mein hai\n"
+        error_line_list.append(line)
+    error_message = "".join(error_line_list)
+    # error_message.replace('if',"agar")
     print(error_message)
