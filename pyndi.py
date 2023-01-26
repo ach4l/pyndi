@@ -9,6 +9,17 @@ print("Filename :",sys.argv[1])
 #filename = input("Enter filename")
 filename = sys.argv[1]
 
+
+
+#removing blank lines from the pyndi file before-hand
+with open(filename) as reader, open(filename, 'r+') as writer:
+  for line in reader:
+    if line.strip():
+      writer.write(line)
+  writer.truncate()
+
+
+
 # opening and reading the user's pyndi file
 text_file = open(filename, "r") 
 #read whole file to a string
@@ -16,17 +27,22 @@ code_pyndi = text_file.read()
 #close file
 text_file.close()
 #print("Pyndi Code")
-#print(code_pyndi)
+print(code_pyndi)
 
 keyword_list=['if','elif','else:','while','print','for']
+
+
+
+
+
+
+ 
 
 def translate_keywords(code_pyndi):
 
 
 
     # All the translation happens here
-
-
 
 
      #minor_translations_(similar_words_into_one_convention)

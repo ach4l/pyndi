@@ -1,0 +1,18 @@
+sankhya=1
+jabtak sankhya < 5: 
+	dikha(sankhya)
+	agr sankhya = 5:
+		sankhya ko 3  se guna
+	nhi to:
+		sankhya ko 1 se bdha
+1 se lekr 10 tk hr sankhya k liye
+	dikha(sankhya*sankhya)
+	dikha(sankhya+10)
+likh("Hello World")
+a = 0
+agr a == 3
+    likh("Teen tigada kaam bigada")
+nahi to agar a == 0:
+    likh("Main Shoonya pe sawar hoon")
+nhin to:
+    likh("Dekh raha hai binod?")

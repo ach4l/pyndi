@@ -13,6 +13,9 @@ Still under development phase.
 
 
 
+Pre-processing steps:
+1. Removed all the blank lines from the pyndi code
+
 Minor semantics:
 1. user may write agar or agr, not going to make a difference, nahin/nhi/nahi; jbtk/jabtk/jbtak all interpreted identically.
 
