@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import sys
 import time
+import re
+
 # reading filename from the system arguments coming from command line
 n = len(sys.argv)
 print("Total arguments passed:", n)
@@ -36,55 +38,48 @@ keyword_list=['if','elif','else:','while','print','for']
 
 
 def translate_keywords(code_pyndi):
-
-
     # All the translation happens here
 
     #minor_translations_(similar_words_into_one_convention)
     #maybe a better idea is to use arrays to handle them
-    code_python = code_pyndi.replace("jabtk","jbtk")
-    code_python = code_python.replace("jbtak","jbtk")
-    code_python = code_python.replace("jabtak","jbtk")
-    code_python = code_python.replace("agr","agar")
-    code_python = code_python.replace("nhi to","nahin to")
-    code_python = code_python.replace("nhin to","nahin to")
-    code_python = code_python.replace("nahi to","nahin to")
-    code_python = code_python.replace("naahi to","nahin to")
-    code_python = code_python.replace("ydi","yadi")
+    while_words = ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
+    while_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, while_words)))
+    code_python = while_regex.sub("while", code_pyndi)
+
+    nahin_words = ["nhi to","nhin to","nahi to","naahi to"]
+    nahin_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, nahin_words)))
+    code_python = nahin_regex.sub("nahin to", code_python)
+
+    bdhaao_words = ["bdhao","bdha","jodo","jod","jdo"]
+    bdhaao_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, bdhaao_words)))
+    code_python = bdhaao_regex.sub("bdhaao", code_python)
+
+    ghtaao_words = ["ghtao","kam kro","kam krdo","km kro","km krdo"]
+    ghtaao_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, ghtaao_words)))
+    code_python = ghtaao_regex.sub("ghtaao", code_python)
+
+    bhaag_words = ["bhag","vibhajit","wibhajit","vibhajan","wibhajan"]
+    bhaag_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, bhaag_words)))
+    code_python = bhaag_regex.sub("bhaag", code_python)
+
+    print_words = ["likh","likho","bol","dikha","dikhao","dikhaao"]
+    print_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, print_words)))
+    code_python = print_regex.sub("print", code_python)
+
+    
+    code_python = code_python.replace("agr","agar")    
+    code_python = code_python.replace("ydi","agar")
+    code_python = code_python.replace("yadi","agar")
     code_python = code_python.replace("har","hr")
-    code_python = code_python.replace("lekar","lekr")
-    code_python = code_python.replace("bdhao","bdhaao")
-    code_python = code_python.replace("bdha","bdhaao")
-    code_python = code_python.replace("jodo","bdhaao")
-    code_python = code_python.replace("ghtao","ghtaao")
-    code_python = code_python.replace("ghtao","ghtaao")
-    code_python = code_python.replace("kam kro","ghtaao")
-    code_python = code_python.replace("kam krdo","ghtaao")
-    code_python = code_python.replace("km kro","ghtaao")
-    code_python = code_python.replace("km krdo","ghtaao")
-    code_python = code_python.replace("bhag","bhaag")
-    code_python = code_python.replace("bhiwajit","bhaag")
-    code_python = code_python.replace("bhiwajan","bhaag")
-    code_python = code_python.replace("bhiwajn","bhaag")
+    code_python = code_python.replace("lekar","lekr")    
 
-    # print statement
-    code_python = code_python.replace("likh","print")
-    code_python = code_python.replace("likho","print")
-    code_python = code_python.replace("bol","print")
-    code_python = code_python.replace("dikha","print")
-    code_python = code_python.replace("dikhao","print")
-    code_python = code_python.replace("dikhaao","print")
-
-    # if else conditions
+    # if else conditions **** The order of replacement here needs to be maintained ****
     code_python = code_python.replace("nahin to agar","elif")
     code_python = code_python.replace("agar","if")
-    code_python = code_python.replace("yadi","if")
     code_python = code_python.replace("nahin to","else")
 
-    #while loop
-    code_python = code_python.replace("jbtk","while")
+    
     return code_python
-
 code_python = translate_keywords(code_pyndi)
 
 
@@ -108,6 +103,16 @@ def for_and_dec_op_syntax_simpli(code_python):
     #line-wise processing starts here
     
     for line in code_python_list:
+        #### handling print statement----starts
+
+        # just handling no brackets for now
+
+        if "print" in line:
+            if '(' not in line:
+                line = line.replace("print ","print(")
+                line = line + ')'
+
+        #### handling print statement----ends
         
         #### handling if statement----starts
         
@@ -126,7 +131,7 @@ def for_and_dec_op_syntax_simpli(code_python):
     
     
            ### if these three conditions are not met, we assume that the line contains statement for updating a variable
-    
+        ############# IMPORTANT - THESE CONDITIONS MIGHT BREAK DOWN AS NEW FUNCTIONS ARE ADDED ################
         if (first_word not in keyword_list):                                        ## (1) first word is not a keyword
             if ('=' not in line):                                                   ## (2) no assignment/comparison present
                 if "print" not in line:                                             ##(3) no print statement
