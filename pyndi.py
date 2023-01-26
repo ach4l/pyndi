@@ -9,6 +9,17 @@ print("Filename :",sys.argv[1])
 #filename = input("Enter filename")
 filename = sys.argv[1]
 
+
+
+#removing blank lines from the pyndi file before-hand
+with open(filename) as reader, open(filename, 'r+') as writer:
+  for line in reader:
+    if line.strip():
+      writer.write(line)
+  writer.truncate()
+
+
+
 # opening and reading the user's pyndi file
 text_file = open(filename, "r") 
 #read whole file to a string
@@ -20,6 +31,16 @@ text_file.close()
 
 keyword_list=['if','elif','else:','while','print','for']
 
+
+
+
+
+
+ 
+
+
+
+
 def translate_keywords(code_pyndi):
 
 
@@ -27,9 +48,7 @@ def translate_keywords(code_pyndi):
     # All the translation happens here
 
 
-
-
-     #minor_translations_(similar_words_into_one_convention)
+    #minor_translations_(similar_words_into_one_convention)
     #maybe a better idea is to use arrays to handle them
     code_python = code_pyndi.replace("jabtk","jbtk")
     code_python = code_python.replace("jbtak","jbtk")
@@ -42,10 +61,26 @@ def translate_keywords(code_pyndi):
     code_python = code_python.replace("ydi","yadi")
     code_python = code_python.replace("har","hr")
     code_python = code_python.replace("lekar","lekr")
+    code_python = code_python.replace("bdhao","bdhaao")
+    code_python = code_python.replace("bdha","bdhaao")
+    code_python = code_python.replace("jodo","bdhaao")
+    code_python = code_python.replace("ghtao","ghtaao")
+    code_python = code_python.replace("ghtao","ghtaao")
+    code_python = code_python.replace("kam kro","ghtaao")
+    code_python = code_python.replace("kam krdo","ghtaao")
+    code_python = code_python.replace("km kro","ghtaao")
+    code_python = code_python.replace("km krdo","ghtaao")
+    code_python = code_python.replace("bhag","bhaag")
+    code_python = code_python.replace("bhiwajit","bhaag")
+    code_python = code_python.replace("bhiwajan","bhaag")
+    code_python = code_python.replace("bhiwajn","bhaag")
+
     # print statement
     code_python = code_python.replace("likh","print")
     code_python = code_python.replace("bol","print")
     code_python = code_python.replace("dikha","print")
+    code_python = code_python.replace("dikhao","print")
+    code_python = code_python.replace("dikhaao","print")
 
     # if else conditions
     code_python = code_python.replace("nahin to agar","elif")
@@ -58,6 +93,10 @@ def translate_keywords(code_pyndi):
     return code_python
 
 code_python = translate_keywords(code_pyndi)
+
+
+
+
 
 # for_loop_numbers
 
@@ -83,42 +122,51 @@ def for_numbers_translate(code_python):
     return code_python
 code_python = for_numbers_translate(code_python)
 
-def while_translate(code_python):
+
+
+#deciphering_operations_and_operands
+
+def dec_op(code_python):
     #line-segmentation-while
     code_python_lines=code_python.splitlines()
-    line_list_while = []
+    line_list_dec_op = []
     for line in code_python_lines:
         first_word = line.strip().split(" ")[0]    
-        # if these three conditions are not met, we assume that the line contains updating a variable
+        # if these three conditions are not met, we assume that the line contains statement for updating a variable
         if (first_word not in keyword_list):
             if ('=' not in line):
                 if "print" not in line:
                     # Need number of spaces to keep track of indentation
                     # currently only works when indentation is done using tab
                     number_of_spaces = len(line) - len(line.lstrip())
-                    # var is the variable and r_var is the number it needs to be updated by            
+                    # var is the variable and r_var is the number by which it needs to be updated by            
                     r_var=line.strip().split(" ")[2]                            
                     var=first_word
                     # reassignment can be of four types, add subtract multiply or divide                
-                    if 'bdhaao'in line or 'bdhao' in line or 'bdha' in line or 'jodo' in line:
+                    if 'bdhaao'in line:
                         line = var + '=' + var + '+' + r_var
-                    elif 'ghtao'in line or 'ghtaao' in line or 'kam kro' in line or 'km kro' in line:
+                    elif 'ghtaao'in line:
                         line = var + '=' + var + '-' + r_var
                     elif 'guna'in line:
                         line = var + '=' + var + '*' + r_var
                     elif 'bhag' in line or 'bhaag' in line:
-                        if r_var ==0:
-                            print("0 se bhaag nhi krste")
+                        if (r_var=="0"):
+                            print('@@@@@@@@@@@@@@@@@@@@@')
+                            print("maaf kijiye, 0 se bhaag nhi krste")
+                            print('@@@@@@@@@@@@@@@@@@@@@')
+                            line = var + '=' + var + '/' + r_var
                         else:
                             line = var + '=' + var + '/' + r_var
                     else:
                         print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do")
                     line =  ' '*number_of_spaces*6+line
-        line_list_while.append(line)       
-    code_python = "\n".join(line_list_while)
+        line_list_dec_op.append(line)       
+    code_python = "\n".join(line_list_dec_op)
     return code_python
 
-code_python = while_translate(code_python)
+code_python = dec_op(code_python)
+
+
 
 def syntax_simplifier(code_python):
     # simplyfying comparison operators == is not very intuitive
@@ -132,7 +180,7 @@ def syntax_simplifier(code_python):
             if  line.count('=')==1:
                 line=line.replace("=","==")
         # Removing the need for colon in if for and while statements
-        if 'for' in line or 'while' in line or 'if' in line:
+        if 'for' in line or 'while' in line or 'if' in line or 'elif' in line or 'else' in line:
             if line.count(':')==0:
                 line=line+':'
         line_list.append(line)
@@ -141,6 +189,12 @@ def syntax_simplifier(code_python):
     return(code_python)
 
 code_python = syntax_simplifier(code_python)
+
+
+
+
+
+
 # Final Python code
 print("Final Python Code")
 print(code_python)
