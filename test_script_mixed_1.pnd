@@ -1,0 +1,33 @@
+number=10
+dikha(number)
+j=6
+likh(j)
+1 se lekr 10 tk hr sankhya k liye
+	dikha(sankhya*sankhya)
+	dikha(sankhya+10)
+sankhya=1
+jabtak sankhya < 5: 
+	dikha(sankhya)
+	agr sankhya = 5:
+		sankhya ko 3  se guna
+	nhi to:
+		sankhya ko 1 se bdha
+e=10 
+e ko 10 se km krdo
+m=10
+dikha(m)
+e=13
+m ko 2 se bhaag kro
+dikha(e)
+1 se lekr 10 tk hr sankhya k liye
+	dikha(sankhya*sankhya)
+	dikha(sankhya+10)
+sankhya=1
+jabtak sankhya < 5: 
+	dikha(sankhya)
+	agr sankhya = 5:
+		sankhya ko 3  se guna
+	nhi to:
+		sankhya ko 1 se bdha
+e=10 
+e ko 10 se km krdo
