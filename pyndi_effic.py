@@ -35,18 +35,10 @@ keyword_list=['if','elif','else:','while','print','for']
 
 
 
-
- 
-
-
-
-
 def translate_keywords(code_pyndi):
 
 
-
     # All the translation happens here
-
 
     #minor_translations_(similar_words_into_one_convention)
     #maybe a better idea is to use arrays to handle them
@@ -77,6 +69,7 @@ def translate_keywords(code_pyndi):
 
     # print statement
     code_python = code_python.replace("likh","print")
+    code_python = code_python.replace("likho","print")
     code_python = code_python.replace("bol","print")
     code_python = code_python.replace("dikha","print")
     code_python = code_python.replace("dikhao","print")
@@ -97,18 +90,20 @@ code_python = translate_keywords(code_pyndi)
 
 
 
+#making_efficient_by_performing_splitting_only_once
 
 # for_loop_numbers
-
-def for_numbers_translate(code_python):
+def for_and_dec_op_syntax_simpli(code_python):
     """
     this function takes 'translated' pyndi code and processes for loop
     hr (har) is the keyword used to know that the for loop begins there
     currently only works for numbers
-    need to generalise it for all for loop    
+    need to generalise it for all for loop 
+    then deciphers the operations and operands present in all the lines
+    finally some syntax simplification stuff
     """     
     code_python_list=code_python.splitlines()
-    line_list_for=[]
+    line_list=[]
     for line in code_python_list:
         if 'hr' in line:
             word_list=line.strip().split(' ')
@@ -116,23 +111,9 @@ def for_numbers_translate(code_python):
             var=word_list[hr_index+1]
             low_limit=word_list[0]
             upp_limit=word_list[3]
-            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'        
-        line_list_for.append(line) 
-    code_python = "\n".join(line_list_for) 
-    return code_python
-code_python = for_numbers_translate(code_python)
-
-
-
-#deciphering_operations_and_operands
-
-def dec_op(code_python):
-    #line-segmentation-while
-    code_python_lines=code_python.splitlines()
-    line_list_dec_op = []
-    for line in code_python_lines:
-        first_word = line.strip().split(" ")[0]    
-        # if these three conditions are not met, we assume that the line contains statement for updating a variable
+            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'    
+        first_word = line.strip().split(" ")[0]        
+# if these three conditions are not met, we assume that the line contains statement for updating a variable
         if (first_word not in keyword_list):
             if ('=' not in line):
                 if "print" not in line:
@@ -151,28 +132,15 @@ def dec_op(code_python):
                         line = var + '=' + var + '*' + r_var
                     elif 'bhag' in line or 'bhaag' in line:
                         if (r_var=="0"):
-                            print('@@@@@@@@@@@@@@@@@@@@@')
+             #               print('@@@@@@@@@@@@@@@@@@@@@')
                             print("maaf kijiye, 0 se bhaag nhi krste")
-                            print('@@@@@@@@@@@@@@@@@@@@@')
+              #              print('@@@@@@@@@@@@@@@@@@@@@')
                             line = var + '=' + var + '/' + r_var
                         else:
                             line = var + '=' + var + '/' + r_var
                     else:
                         print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do")
                     line =  ' '*number_of_spaces*6+line
-        line_list_dec_op.append(line)       
-    code_python = "\n".join(line_list_dec_op)
-    return code_python
-
-code_python = dec_op(code_python)
-
-
-
-def syntax_simplifier(code_python):
-    # simplyfying comparison operators == is not very intuitive
-    code_python_lines=code_python.splitlines()
-    line_list = []
-    for line in code_python_lines:
         if 'if' in line:
             # comparison operator two different ways      
             if ("barabar h" in line):
@@ -183,14 +151,11 @@ def syntax_simplifier(code_python):
         if 'for' in line or 'while' in line or 'if' in line or 'elif' in line or 'else' in line:
             if line.count(':')==0:
                 line=line+':'
-        line_list.append(line)
-	  
+        line_list.append(line)       
     code_python = "\n".join(line_list)
-    return(code_python)
+    return code_python
 
-code_python = syntax_simplifier(code_python)
-
-
+code_python = for_and_dec_op_syntax_simpli(code_python)
 
 
 
