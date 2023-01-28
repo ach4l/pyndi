@@ -3,6 +3,8 @@ import sys
 import time
 import re
 import traceback
+from contextlib import redirect_stdout
+from io import StringIO
 
 # reading filename from the system arguments coming from command line
 n = len(sys.argv)
@@ -190,24 +192,15 @@ code_python = for_and_dec_op_syntax_simpli(code_python)
 
 
 
-# Final Python code
-print("Final Python Code")
-print(code_python)
-
-# Saving the python code in a .py file just in case the user wants it
-filename_py = filename.split(".")[0] + ".py"
-py_file = open(filename_py, "w")
-n = py_file.write(code_python)
-py_file.close()
-
-# Executing the translated python code
-print("Code chalane pe ye mila")
+f = StringIO()
 try:
-    exec(code_python)
-# Catching the errors as exceptions. Need to translate the errors. 
-except Exception as e:    
+    with redirect_stdout(f):
+        exec(code_python)
+    s = f.getvalue()
+    s = "Bahut Badhiya! Aapka code sahi se chala \n" + s
+except Exception as e:
     error_message = traceback.format_exc()
-    error_message = error_message.replace("Traceback (most recent call last):","😟 Kuch to gadbad hai. Daya, pata karo!")
+    error_message = error_message.replace("Traceback (most recent call last):","Kuch to gadbad hai. Daya, pata karo!")
     error_message = error_message.replace('File "<string>", ',"")
     error_message_list = error_message.splitlines(True)
     error_message_list.pop(1)
@@ -220,5 +213,9 @@ except Exception as e:
             line = "Gadbad shayad line " + line_no + " mein hai\n"
         error_line_list.append(line)
     error_message = "".join(error_line_list)
-    # error_message.replace('if',"agar")
-    print(error_message)
+    s = error_message.replace('if',"agar")
+
+filename_output = filename.split(".")[0] + "_output.txt"
+output_file = open(filename_output, "w")
+n = output_file.write(s)
+output_file.close()
