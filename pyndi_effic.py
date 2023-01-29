@@ -53,7 +53,7 @@ def translate_keywords(code_pyndi):
     nahin_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, nahin_words)))
     code_python = nahin_regex.sub("nahin to", code_python)
 
-    bdhaao_words = ["badhao","bdhao","bdha","jodo","jod","jdo"]
+    bdhaao_words = ["badhao","bdhao","bdha","bdhaa","jodo","jod","jdo"]
     bdhaao_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, bdhaao_words)))
     code_python = bdhaao_regex.sub("bdhaao", code_python)
 
@@ -120,8 +120,8 @@ def for_and_dec_op_syntax_simpli(code_python):
 
         # just handling no brackets for now
 
-        if "print" in line:
-            if '(' not in line:
+        if "print" in line:            
+            if line[5] == " ":
                 line = line.replace("print ","print(")
                 line = line + ')'
             
@@ -155,11 +155,11 @@ def for_and_dec_op_syntax_simpli(code_python):
                                  #indentation thing
                     ## var is the variable and r_var is the number by which it needs to be updated by
                     ## assuming semantic-rule is followed (specified in readme)
-                    try:
-                        r_var=line.strip().split(" ")[2]
-                    except:
-                        print("Couldnt find r_var in following line :")
-                        print(line)                            #extracting r_var                     
+                    
+                    r_var=line.strip().split(" ")[2]
+                    
+                    print("Couldnt find r_var in following line :")
+                    print(line)                            #extracting r_var                     
                     var=first_word                                                  #extracting var
                     # updation can be of four types, add subtract multiply or divide                
                     if 'bdhaao'in line:                                             #addition
