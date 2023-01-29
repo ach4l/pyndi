@@ -1,7 +1,7 @@
 Bahut Badhiya! Aapka code sahi se chala 
-40
-50
-60
-70
-80
-90
+a itna hai : 40
+a itna hai : 50
+a itna hai : 60
+a itna hai : 70
+a itna hai : 80
+a itna hai : 90

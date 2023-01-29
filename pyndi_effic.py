@@ -128,6 +128,7 @@ def for_and_dec_op_syntax_simpli(code_python):
 
         #### handling print statement----ends
         
+        
         #### handling for statement----starts
         
         if 'hr' in line:                                                            #seeking if it has 'hr'; if so it has to be 'if' statement
@@ -158,7 +159,7 @@ def for_and_dec_op_syntax_simpli(code_python):
                     
                     r_var=line.strip().split(" ")[2]
                     
-                    print("Couldnt find r_var in following line :")
+                    print("Couldnot find r_var in following line :")
                     print(line)                            #extracting r_var                     
                     var=first_word                                                  #extracting var
                     # updation can be of four types, add subtract multiply or divide                
@@ -200,6 +201,27 @@ def for_and_dec_op_syntax_simpli(code_python):
                 line=line+':'
                 
        ####handling minor syntax things in if statement---ends
+       
+       
+       
+       
+
+       ####refining_the_print_statement_part_2-----starts
+       #### displaying_variable's_name_alongwith_value
+       
+        if 'print' in line:                                             
+            if '"' not in line:                                  #variable written in print's argument
+                if "'" not in line:
+                    obc_index=line.rfind('(')
+                    cbc_index=line.rfind(')')
+                    var_name=line[obc_index+1:cbc_index]                                #extracting variable's name
+                    line = 'print("' + var_name + ' itna hai :",' +var_name + ')'       #refined print statement
+                
+                
+        ####refining_the_print_statement_part_2-----ends
+       
+       
+       
         line =  ' '*number_of_spaces*6+line        
         line_list.append(line)                                                  #appending the modified line to line_list
     code_python = "\n".join(line_list)                                          #code in python!!!
@@ -208,6 +230,7 @@ def for_and_dec_op_syntax_simpli(code_python):
 code_python = for_and_dec_op_syntax_simpli(code_python)
 print("####### After for_and_dec_op #######")
 print(code_python)
+#exec(code_python)
 
 # Saving the python code in a .py file just in case the user wants it
 filename_py = filename.split(".")[0] + ".py"

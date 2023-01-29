@@ -1,4 +1,5 @@
-likh("Hello World")
+likh('Hello World')
+likh("polo")
 a = 0
 agr a == 3
     likh("Teen tigada kaam bigada")

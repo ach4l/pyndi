@@ -12,7 +12,7 @@ list_of_diff_found = []
 for file in dir_list:
     if file.endswith(".pnd"):
         print(file)
-        os.system("python pyndi.py test_files/" + file)
+        os.system("python pyndi_effic.py test_files/" + file)
         filename_prefix = file.split(".")[0]
         file_correct = "test_files/" + filename_prefix + "_correct_output.txt"
         file_to_check = "test_files/" + filename_prefix + "_output.txt"
