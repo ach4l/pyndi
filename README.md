@@ -1,4 +1,4 @@
-# pyndi
+
 ![Pyndi](https://i.postimg.cc/52w5dqk0/pyndi-logo.png)
 
 
