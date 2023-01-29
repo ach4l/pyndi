@@ -1,5 +1,5 @@
 a=40
-jbtk a < 100: 
+jbtk a < 100:
 	dikha(a)
 	agr a = 8:
 		a ko 3  se guna

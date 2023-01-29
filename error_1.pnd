@@ -1,0 +1,7 @@
+a = 0
+jab tak a<100:
+	a ko 1 se bdhaao
+	agar a/2 barabar hai 5:
+		likh(a)
+	nahin to:
+		likh(a/2)

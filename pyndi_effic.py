@@ -31,8 +31,8 @@ text_file = open(filename, "r")
 code_pyndi = text_file.read() 
 #close file
 text_file.close()
-#print("Pyndi Code")
-#print(code_pyndi)
+print("Pyndi Code")
+print(code_pyndi)
 
 keyword_list=['if','elif','else:','while','print','for']
 
@@ -53,7 +53,7 @@ def translate_keywords(code_pyndi):
     nahin_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, nahin_words)))
     code_python = nahin_regex.sub("nahin to", code_python)
 
-    bdhaao_words = ["bdhao","bdha","jodo","jod","jdo"]
+    bdhaao_words = ["badhao","bdhao","bdha","jodo","jod","jdo"]
     bdhaao_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, bdhaao_words)))
     code_python = bdhaao_regex.sub("bdhaao", code_python)
 
@@ -68,6 +68,10 @@ def translate_keywords(code_pyndi):
     print_words = ["likh","likho","bol","dikha","dikhao","dikhaao"]
     print_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, print_words)))
     code_python = print_regex.sub("print", code_python)
+
+    barabar_words = ["barabar hai","brabr","barabr"]
+    barabar_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, barabar_words)))
+    code_python = barabar_regex.sub("=", code_python)
 
     
     code_python = code_python.replace("agr","agar")    
@@ -84,6 +88,9 @@ def translate_keywords(code_pyndi):
     
     return code_python
 code_python = translate_keywords(code_pyndi)
+print("####### After Translation #######")
+print(code_python)
+
 
 
 
@@ -106,6 +113,9 @@ def for_and_dec_op_syntax_simpli(code_python):
     #line-wise processing starts here
     
     for line in code_python_list:
+        #### handling indentation ######
+        number_of_spaces = len(line) - len(line.lstrip())
+        line = line.lstrip()
         #### handling print statement----starts
 
         # just handling no brackets for now
@@ -114,10 +124,11 @@ def for_and_dec_op_syntax_simpli(code_python):
             if '(' not in line:
                 line = line.replace("print ","print(")
                 line = line + ')'
+            
 
         #### handling print statement----ends
         
-        #### handling if statement----starts
+        #### handling for statement----starts
         
         if 'hr' in line:                                                            #seeking if it has 'hr'; if so it has to be 'if' statement
             word_list=line.strip().split(' ')                                       #splitting line
@@ -125,8 +136,9 @@ def for_and_dec_op_syntax_simpli(code_python):
             var=word_list[hr_index+1]
             low_limit=word_list[0]                                                  #extracting the lower_limit of variable
             upp_limit=word_list[3]                                                  #extracting the upper_limit of variable
-            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'           #rephrasing line as a standard python code
-       #### handling if statement----ends
+            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'
+                                                  #rephrasing line as a standard python code
+       #### handling for statement----ends
             
         ####deciphering operations and operands-----starts
         first_word = line.strip().split(" ")[0]                                     #extracting first string in line    
@@ -140,10 +152,14 @@ def for_and_dec_op_syntax_simpli(code_python):
                 if "print" not in line:                                             ##(3) no print statement
                     # Need number of spaces to keep track of indentation
                     # currently only works when indentation is done using tab
-                    number_of_spaces = len(line) - len(line.lstrip())               #indentation thing
+                                 #indentation thing
                     ## var is the variable and r_var is the number by which it needs to be updated by
                     ## assuming semantic-rule is followed (specified in readme)
-                    r_var=line.strip().split(" ")[2]                                #extracting r_var                     
+                    try:
+                        r_var=line.strip().split(" ")[2]
+                    except:
+                        print("Couldnt find r_var in following line :")
+                        print(line)                            #extracting r_var                     
                     var=first_word                                                  #extracting var
                     # updation can be of four types, add subtract multiply or divide                
                     if 'bdhaao'in line:                                             #addition
@@ -160,7 +176,7 @@ def for_and_dec_op_syntax_simpli(code_python):
                             line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
                     else:
                         print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do") #if user does not follow semantic-rule
-                    line =  ' '*number_of_spaces*6+line                             #indentation thing
+                                              #indentation thing
         ####deciphering operations and operands-----ends
         
         
@@ -169,12 +185,14 @@ def for_and_dec_op_syntax_simpli(code_python):
         
         ###(based on the observation that only comparison operator should follow if/elif statements)  
           
-        if 'if' in line:                                                    
+        if 'if' in line:                                                              
             # comparison operator two different ways      
             if ("barabar h" in line):
                 line=line.replace("barabar h",'==')
             if  line.count('=')==1:
                 line=line.replace("=","==")
+            line = line.lstrip()
+            
                 
         ### Removing the need for colon in if, for and while statements
         if 'for' in line or 'while' in line or 'if' in line or 'elif' in line or 'else' in line:
@@ -182,13 +200,20 @@ def for_and_dec_op_syntax_simpli(code_python):
                 line=line+':'
                 
        ####handling minor syntax things in if statement---ends
-       
+        line =  ' '*number_of_spaces*6+line        
         line_list.append(line)                                                  #appending the modified line to line_list
     code_python = "\n".join(line_list)                                          #code in python!!!
     return code_python
 
 code_python = for_and_dec_op_syntax_simpli(code_python)
+print("####### After for_and_dec_op #######")
+print(code_python)
 
+# Saving the python code in a .py file just in case the user wants it
+filename_py = filename.split(".")[0] + ".py"
+py_file = open(filename_py, "w")
+n = py_file.write(code_python)
+py_file.close()
 
 
 

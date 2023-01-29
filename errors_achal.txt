@@ -1,0 +1,15 @@
+Code
+a = 0
+jab tak a<100:
+	agar a/2 barabar hai 5:
+		likh(a)
+	nahin to:
+		likh(a/2)
+
+Error
+File "/home/ach4l/persorank/pyndi.py", line 114, in for_and_dec_op_syntax_simpli
+    r_var=line.strip().split(" ")[2]                                #extracting r_var
+IndexError: list index out of range
+
+Discussion
+There is no updation of variable here. it should not be searching for r_var. maybe need one more condition
