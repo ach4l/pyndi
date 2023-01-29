@@ -1,4 +1,7 @@
-# pyndi
+
+![Pyndi](https://i.postimg.cc/52w5dqk0/pyndi-logo.png)
+
+
 
 The aim of this project is to help new learners to learn coding in their mother tongue. It is essentially a wrapper over python which lets users code in 'hindi' and in future other regional languages.
 
