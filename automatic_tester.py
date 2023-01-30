@@ -28,7 +28,7 @@ for file in dir_list:
                     list_of_diff_found.append(message_to_return)
                     print("@@@@@@@@@@@@ FOUND A DIFF @@@@@@@@@@@@@@@@")
                     print(line)
-print(list_of_diff_found[0])
+print(list_of_diff_found)
             
                     
 

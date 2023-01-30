@@ -1,101 +1,101 @@
 Bahut Badhiya! Aapka code sahi se chala 
-1
-11
-4
-12
-9
-13
-16
-14
-25
-15
-36
-16
-49
-17
-64
-18
-81
-19
-1
-2
-3
-4
-1
-11
-4
-12
-9
-13
-16
-14
-25
-15
-36
-16
-49
-17
-64
-18
-81
-19
-2
-3
-4
-10
-6
+sankhya*sankhya itna hai : 1
+sankhya+10 itna hai : 11
+sankhya*sankhya itna hai : 4
+sankhya+10 itna hai : 12
+sankhya*sankhya itna hai : 9
+sankhya+10 itna hai : 13
+sankhya*sankhya itna hai : 16
+sankhya+10 itna hai : 14
+sankhya*sankhya itna hai : 25
+sankhya+10 itna hai : 15
+sankhya*sankhya itna hai : 36
+sankhya+10 itna hai : 16
+sankhya*sankhya itna hai : 49
+sankhya+10 itna hai : 17
+sankhya*sankhya itna hai : 64
+sankhya+10 itna hai : 18
+sankhya*sankhya itna hai : 81
+sankhya+10 itna hai : 19
+sankhya itna hai : 1
+sankhya itna hai : 2
+sankhya itna hai : 3
+sankhya itna hai : 4
+sankhyaa*sankhyaa itna hai : 1
+sankhyaa+10 itna hai : 11
+sankhyaa*sankhyaa itna hai : 4
+sankhyaa+10 itna hai : 12
+sankhyaa*sankhyaa itna hai : 9
+sankhyaa+10 itna hai : 13
+sankhyaa*sankhyaa itna hai : 16
+sankhyaa+10 itna hai : 14
+sankhyaa*sankhyaa itna hai : 25
+sankhyaa+10 itna hai : 15
+sankhyaa*sankhyaa itna hai : 36
+sankhyaa+10 itna hai : 16
+sankhyaa*sankhyaa itna hai : 49
+sankhyaa+10 itna hai : 17
+sankhyaa*sankhyaa itna hai : 64
+sankhyaa+10 itna hai : 18
+sankhyaa*sankhyaa itna hai : 81
+sankhyaa+10 itna hai : 19
+sankhya itna hai : 2
+sankhya itna hai : 3
+sankhya itna hai : 4
+number itna hai : 10
+j itna hai : 6
 Hello World
 Main Shoonya pe sawar hoon
-1
-11
-4
-12
-9
-13
-16
-14
-25
-15
-36
-16
-49
-17
-64
-18
-81
-19
-1
-2
-3
-4
-10
-13
-10
-1
-11
-4
-12
-9
-13
-16
-14
-25
-15
-36
-16
-49
-17
-64
-18
-81
-19
-1
-2
-3
-4
-40
-50
-60
-70
-80
-90
+sankhya*sankhya itna hai : 1
+sankhya+10 itna hai : 11
+sankhya*sankhya itna hai : 4
+sankhya+10 itna hai : 12
+sankhya*sankhya itna hai : 9
+sankhya+10 itna hai : 13
+sankhya*sankhya itna hai : 16
+sankhya+10 itna hai : 14
+sankhya*sankhya itna hai : 25
+sankhya+10 itna hai : 15
+sankhya*sankhya itna hai : 36
+sankhya+10 itna hai : 16
+sankhya*sankhya itna hai : 49
+sankhya+10 itna hai : 17
+sankhya*sankhya itna hai : 64
+sankhya+10 itna hai : 18
+sankhya*sankhya itna hai : 81
+sankhya+10 itna hai : 19
+sankhya itna hai : 1
+sankhya itna hai : 2
+sankhya itna hai : 3
+sankhya itna hai : 4
+m itna hai : 10
+e itna hai : 13
+r itna hai : 10
+sankhya*sankhya itna hai : 1
+sankhya+10 itna hai : 11
+sankhya*sankhya itna hai : 4
+sankhya+10 itna hai : 12
+sankhya*sankhya itna hai : 9
+sankhya+10 itna hai : 13
+sankhya*sankhya itna hai : 16
+sankhya+10 itna hai : 14
+sankhya*sankhya itna hai : 25
+sankhya+10 itna hai : 15
+sankhya*sankhya itna hai : 36
+sankhya+10 itna hai : 16
+sankhya*sankhya itna hai : 49
+sankhya+10 itna hai : 17
+sankhya*sankhya itna hai : 64
+sankhya+10 itna hai : 18
+sankhya*sankhya itna hai : 81
+sankhya+10 itna hai : 19
+sankhya itna hai : 1
+sankhya itna hai : 2
+sankhya itna hai : 3
+sankhya itna hai : 4
+a itna hai : 40
+a itna hai : 50
+a itna hai : 60
+a itna hai : 70
+a itna hai : 80
+a itna hai : 90

@@ -1,23 +1,23 @@
 Bahut Badhiya! Aapka code sahi se chala 
-1
-11
-4
-12
-9
-13
-16
-14
-25
-15
-36
-16
-49
-17
-64
-18
-81
-19
-1
-2
-3
-4
+sankhya*sankhya itna hai : 1
+sankhya+10 itna hai : 11
+sankhya*sankhya itna hai : 4
+sankhya+10 itna hai : 12
+sankhya*sankhya itna hai : 9
+sankhya+10 itna hai : 13
+sankhya*sankhya itna hai : 16
+sankhya+10 itna hai : 14
+sankhya*sankhya itna hai : 25
+sankhya+10 itna hai : 15
+sankhya*sankhya itna hai : 36
+sankhya+10 itna hai : 16
+sankhya*sankhya itna hai : 49
+sankhya+10 itna hai : 17
+sankhya*sankhya itna hai : 64
+sankhya+10 itna hai : 18
+sankhya*sankhya itna hai : 81
+sankhya+10 itna hai : 19
+sankhya itna hai : 1
+sankhya itna hai : 2
+sankhya itna hai : 3
+sankhya itna hai : 4

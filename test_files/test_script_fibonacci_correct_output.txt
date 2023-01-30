@@ -1,18 +1,18 @@
 Bahut Badhiya! Aapka code sahi se chala 
-1
-2
-3
-5
-8
-13
-21
-34
-55
-89
-144
-233
-377
-610
-987
-1597
-2584
+c itna hai : 1
+c itna hai : 2
+c itna hai : 3
+c itna hai : 5
+c itna hai : 8
+c itna hai : 13
+c itna hai : 21
+c itna hai : 34
+c itna hai : 55
+c itna hai : 89
+c itna hai : 144
+c itna hai : 233
+c itna hai : 377
+c itna hai : 610
+c itna hai : 987
+c itna hai : 1597
+c itna hai : 2584
