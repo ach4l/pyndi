@@ -4,112 +4,218 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    window.onload = function(){
-    function enableTab(id) {
-    var el = document.getElementById(id);
-    el.onkeydown = function(e) {
-        if (e.keyCode === 9) { // tab was pressed
-
-            // get caret position/selection
-            var val = this.value,
-                start = this.selectionStart,
-                end = this.selectionEnd;
-
-            // set textarea value to: text before caret + tab + text after caret
-            this.value = val.substring(0, start) + '\t' + val.substring(end);
-
-            // put caret at right position again
-            this.selectionStart = this.selectionEnd = start + 1;
-
-            // prevent the focus lose
-            return false;
-
-        }
-    };
-}
-
-// Enable the tab character onkeypress (onkeydown) inside textarea...
-// ... for a textarea that has an `id="my-textarea"`
-enableTab("editor");
-    }
-  </script>
+  
+ 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-  
-  
+
+  <link rel="stylesheet"
+  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+<!-- Include stylesheet -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+
+
+
 </head>
 <body>
-    <div class="content-center mb-2 w-80">
+    <div class="content-center mb-2 w-80 ml-2">
     <span class="text-6xl place-items-center content-center font-bold text-center text-blue-500 hover:text-yellow-500 mb-6 ">py</span>
     <span class="text-6xl place-items-center content-center font-bold text-center text-yellow-500 hover:text-blue-500 mb-6 -ml-1">ndi</span>
     
-</div>  
-<span class="font-bold font-serif text-gray-500 text-center mt-8 w-80">Simplying Coding for Hindi Speakers</span>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div class="rounded overflow-hidden shadow-lg">
+</div> 
+<span class="font-bold ml-2 font-serif text-gray-500 text-center mt-8 w-80 justify-self-end">Hindi mein Coding!</span>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 ml-1 mr-3">
+    <!-- Include the Quill library -->
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<div class="container mb-10 ml-1" >
+    <form name="code_pyndi">
+    <div id="editor" class="ql-snow bg-yellow-500 bg-opacity-50" >
+        <p class="font-sans font-bold ..."><strong>Pyndi Code</strong> </p>
+        <pre name = "code_pnd" id="code_pnd" form = "code_pyndi"><code class="python">likh("Hello World")</code></pre>             
+    </div>
+    
+    
+    </form>
+</div>
+
+<div class="container mb-10 ml-1 mr-2">
+    <div id="editor2" class="ql-snow bg-blue-500 bg-opacity-50" >
+        <p class="font-sans font-bold ..."><strong>Python Code</strong> </p>      
+        <pre><code id="code_python" class="python">print "Hello World"</code></pre>
         
-            <div class="w-full mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
-                <div class="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
-                    <div class="flex flex-wrap items-center divide-gray-200 sm:divide-x dark:divide-gray-600">
-                        <div class="flex items-center space-x-1 sm:pr-4">
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M8 4a3 3 0 00-3 3v4a5 5 0 0010 0V7a1 1 0 112 0v4a7 7 0 11-14 0V7a5 5 0 0110 0v4a3 3 0 11-6 0V7a1 1 0 012 0v4a1 1 0 102 0V7a3 3 0 00-3-3z" clip-rule="evenodd"></path></svg>
-                                <span class="sr-only">Attach file</span>
-                            </button>
-                            <form name="code_pyndi">
-                            <button type="button" id="run" onclick="send_code()" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"> <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/> </svg>
-                                <span class="sr-only">Code Chalao</span>
-                            </button>
-                            <button class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path></svg>
-                                <span class="sr-only">Upload image</span>
-                            </button>
+    </div>
+</div>
+
+<div class="container mb-10 ml-1 mr-2">
+    
+    <div id="editor3" class="ql-snow bg-gray-900 bg-opacity-50 text-white" >
+        <p class="font-sans font-bold text-white ..."><strong class="text-white">Result</strong> </p>
+        
+        
+        
+    </div>
+</div>
+
+  
+  
+
+<!-- Initialize Quill editor -->
+<script src="https://cdn.jsdelivr.net/gh/T-vK/DynamicQuillTools@master/DynamicQuillTools.js"></script>
+<script>
+
+
+
+
+
+  var quill = new Quill('#editor', {
+    modules: {
+    syntax: true,              // Include syntax module
+    toolbar: [[]]  // Include button in toolbar
+  },
+  theme: 'snow'
+  });
+  quill.format('color', 'yellow');
+  quill.root.setAttribute('spellcheck', false);
+
+  hljs.configure({   // optionally configure hljs
+  languages: [ 'python']
+});
+const myButton = new QuillToolbarButton({ 
+    text: 'Code Chalao',
+    color: 'Yellow',
+    icon: '<svg viewBox="0 0 18 18"> <path class="ql-stroke" d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"></path></svg>'
+})
+
+const dropDownItems = {
+        'agar nahin to': 'if_else',
+        'jab tak': 'while',
+        'fibonacci': 'fibonnacci'
+    }
+const myDropDown = new QuillToolbarDropDown({
+        label: "Examples",
+        rememberSelection: false
+    })
+
+    myDropDown.setItems(dropDownItems)
+
+    myDropDown.onSelect = function(label, value, quill) {
+        // Do whatever you want with the new dropdown selection here
+
+        // For example, insert the value of the dropdown selection:
+        const { index, length } = quill.selection.savedRange
+        quill.deleteText(index, length)
+        quill.insertText(index, value)
+        quill.setSelection(index + value.length)
+    }
+
+myButton.attach(quill) 
+myDropDown.attach(quill)
+ 
+
+var quill2 = new Quill('#editor2', {
+    modules: {
+    syntax: true,              // Include syntax module
+    toolbar: [['code-block']]  // Include button in toolbar
+  },
+  theme: 'snow'
+  });
+  quill2.format('color', 'yellow');
+
+  hljs.configure({   // optionally configure hljs
+  languages: [ 'python']
+});
+
+var quill3 = new Quill('#editor3', {
+    modules: {
+    syntax: true,              // Include syntax module
+    toolbar: [['code-block']]  // Include button in toolbar
+  },
+  theme: 'snow'
+  });
+  quill3.format('color', 'yellow');
+  quill3.root.setAttribute('spellcheck', false);
+
+  hljs.configure({   // optionally configure hljs
+  languages: [ 'python']
+});
+
+
+
+
+
+</script>
+
+    
+        <!-- Create the editor container -->
+
+        
+                                   
                             
-                        </div>
-                        <div class="flex flex-wrap items-center space-x-1 sm:pl-4">
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
-                                <span class="sr-only">Add list</span>
-                            </button>
-                            
-                            
-                            <button type="button" class="p-2 text-gray-500 rounded cursor-pointer hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                                <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-                                <span class="sr-only">Download</span>
-                            </button>
-                        </div>
-                    </div>
-                    <button type="button" data-tooltip-target="tooltip-fullscreen" class="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600">
-                        <svg aria-hidden="true" class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 4a1 1 0 011-1h4a1 1 0 010 2H6.414l2.293 2.293a1 1 0 11-1.414 1.414L5 6.414V8a1 1 0 01-2 0V4zm9 1a1 1 0 010-2h4a1 1 0 011 1v4a1 1 0 01-2 0V6.414l-2.293 2.293a1 1 0 11-1.414-1.414L13.586 5H12zm-9 7a1 1 0 012 0v1.586l2.293-2.293a1 1 0 111.414 1.414L6.414 15H8a1 1 0 010 2H4a1 1 0 01-1-1v-4zm13-1a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 010-2h1.586l-2.293-2.293a1 1 0 111.414-1.414L15 13.586V12a1 1 0 011-1z" clip-rule="evenodd"></path></svg>
-                        <span class="sr-only">Full screen</span>
-                    </button>
-                    <div id="tooltip-fullscreen" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
-                        Show full screen
-                        <div class="tooltip-arrow" data-popper-arrow></div>
-                    </div>
-                </div>
-                
-                <div class="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
-                    <label for="editor" class="sr-only">Code Chalao</label>
-                    <textarea form="code_pyndi" name='editor' id="editor" rows="20" class="block w-full px-0 text-sm text-gray-800 bg-white border-0 dark:bg-gray-800 focus:ring-0 dark:text-white dark:placeholder-gray-400" placeholder="Yahan pyndi code likho" required></textarea>
-                </div>
-                </form>
-            </div>
+     
+            
             
         
         
 
-    </div>
-    <div>
-        <div class="rounded overflow-hidden shadow-lg">
-        
-            <label for="message" class="block mb-2 text-sm font-medium text-gray-900">Code ka result</label>
-            <textarea id="message" rows="30" class="w-160 block p-2.5 w-full text-sm text-gray-900 bg-gray-700 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>
-            
-            </div>
-    </div>
+    
+    
   </div>
+  <style>
+
+.box {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+        background: #0057e3;
+      }
+      .overlay {
+        z-index: 9;
+        margin: 30px;
+        background: #009938;
+      }
+    .ql-color-\#e60000 {
+	color: rgb(230, 0, 0);
+}
+#editor.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #eab308;
+    color: #161204;
+    overflow: visible;
+}
+#editor2.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #3d84f4;
+    color: #161204;
+    overflow: visible;
+}
+#editor3.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #636a72;
+    color: #f0efeb;
+    overflow: visible;
+}
+.ql-snow2 .ql-editor2 pre.ql-syntax2 {
+    background-color: #3d84f4;
+    color: #161204;
+    overflow: visible;
+}
+
+.ql-toolbar .ql-stroke {
+    fill: rgb(230, 0, 0);
+    stroke: rgb(150, 35, 35);
+}
+
+.ql-toolbar .ql-fill {
+    fill: rgb(49, 21, 225);
+    stroke: rgb(49, 21, 225);
+}
+
+.ql-toolbar .ql-picker {
+    color: rgb(32, 167, 59);
+}
+  </style>
     
     
   <script>
@@ -125,6 +231,52 @@ enableTab("editor");
           document.getElementById("message").value= data;;
         });
       }
-    </script>   
+    </script> 
+    <script>
+    myButton.onClick = function() {
+        // Do whatever you want here. You could use this.getValue() or this.setValue() if you wanted.
+        delta = quill.getContents();
+        delta_array = delta['ops'];
+        let result = '';
+        for (var i = 0; i < delta_array.length; i++) { 
+            if (i>0){
+                if (i==1){
+                    result=result.concat(delta_array[i]['insert'].slice(1));
+                } else {
+                    result=result.concat(delta_array[i]['insert']);
+                }                
+            }
+            
+        }
+        code_pyndi_enter = delta['ops'][1]['insert']
+        code_pyndi = code_pyndi_enter.slice(1)
+        console.log(code_pyndi);
+        console.log(result);
+        
+          
+            $.post("https://ach4l.pythonanywhere.com/pyndi",
+            {
+              contentType: 'application/json;charset=UTF-8',
+              data: {"code_pyndi":result},
+              dataType: 'json'         
+            },
+            function(data,status){
+                var length = quill3.getLength();
+                console.log(length);
+                quill3.deleteText(7, length);
+                quill3.insertText(7, data);
+              
+            });
+            event.preventDefault();
+        // For example, get the selected text and convert it to uppercase:
+        // const { index, length } = quill.selection.savedRange
+        // const selectedText = quill.getText(index, length)
+        // const newText = selectedText.toUpperCase()
+        // quill.deleteText(index, length)
+        // quill.insertText(index, newText)
+        // quill.setSelection(index, newText.length)
+    }
+</script>
+    
 </body>
 </html>
