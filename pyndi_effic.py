@@ -5,6 +5,7 @@ import re
 import traceback
 from contextlib import redirect_stdout
 from io import StringIO
+import os
 
 # reading filename from the system arguments coming from command line
 n = len(sys.argv)
@@ -34,7 +35,7 @@ text_file.close()
 print("Pyndi Code")
 print(code_pyndi)
 
-keyword_list=['if','elif','else:','while','print','for']
+keyword_list=['if','elif','else','while','print','for']
 
 
 
@@ -43,11 +44,21 @@ keyword_list=['if','elif','else:','while','print','for']
 def translate_keywords(code_pyndi):
     # All the translation happens here
 
+    # removing empty lines
+    line_list = []
+    for line in code_pyndi.splitlines():
+        line_stripped = re.sub(r'\s+', '', line)
+        line_restripped = re.sub(r'(\s|\u180B|\u200B|\u200C|\u200D|\u2060|\uFEFF)+', '', line_stripped)
+        if len(line_restripped)>0:
+            print ("Non White Space")
+            print(line_restripped)
+            line_list.append(line)
+    code_python = "\n".join(line_list)
     #minor_translations_(similar_words_into_one_convention)
     #maybe a better idea is to use arrays to handle them
     while_words = ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
     while_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, while_words)))
-    code_python = while_regex.sub("while", code_pyndi)
+    code_python = while_regex.sub("while", code_python)
 
     nahin_words = ["nhi to","nhin to","nahi to","naahi to"]
     nahin_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, nahin_words)))
@@ -142,44 +153,43 @@ def for_and_dec_op_syntax_simpli(code_python):
        #### handling for statement----ends
             
         ####deciphering operations and operands-----starts
-        first_word = line.strip().split(" ")[0]                                     #extracting first string in line    
+                                            #extracting first string in line    
     
+        
     
     
            ### if these three conditions are not met, we assume that the line contains statement for updating a variable
         ############# IMPORTANT - THESE CONDITIONS MIGHT BREAK DOWN AS NEW FUNCTIONS ARE ADDED ################
-        if (first_word not in keyword_list):                                        ## (1) first word is not a keyword
-            if ('=' not in line):                                                   ## (2) no assignment/comparison present
-                if "print" not in line:                                             ##(3) no print statement
-                    # Need number of spaces to keep track of indentation
-                    # currently only works when indentation is done using tab
-                                 #indentation thing
-                    ## var is the variable and r_var is the number by which it needs to be updated by
-                    ## assuming semantic-rule is followed (specified in readme)
-                    
-                    r_var=line.strip().split(" ")[2]
-                    
-                    print("Couldnot find r_var in following line :")
-                    print(line)                            #extracting r_var                     
-                    var=first_word                                                  #extracting var
-                    # updation can be of four types, add subtract multiply or divide                
-                    if 'bdhaao'in line:                                             #addition
-                        line = var + '=' + var + '+' + r_var                        #rephrasing line as a standard python code
-                    elif 'ghtaao'in line:                                           #subtraction
-                        line = var + '=' + var + '-' + r_var                        #rephrasing line as a standard python code          
-                    elif 'guna'in line:                                             #multiplication
-                        line = var + '=' + var + '*' + r_var                        #rephrasing line as a standard python code
-                    elif 'bhag' in line or 'bhaag' in line:                         #divison
-                        if (r_var=="0"):                                                                        
-                            print("maaf kijiye, 0 se bhaag nhi krste")              #divison by zero error
-                            line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
-                        else:
-                            line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
-                    else:
-                        print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do") #if user does not follow semantic-rule
-                                              #indentation thing
-        ####deciphering operations and operands-----ends
-        
+        if 'bdhaao' in line or 'ghtaao'in line or 'guna'in line or 'bhag' in line:                                       ##(3) no print statement
+            # Need number of spaces to keep track of indentation
+            # currently only works when indentation is done using tab
+                            #indentation thing
+            ## var is the variable and r_var is the number by which it needs to be updated by
+            ## assuming semantic-rule is followed (specified in readme)
+            
+            r_var=line.strip().split(" ")[2]
+            print('@@@@@@@@@@@@@@@@@@@@@@@')
+            print(line)
+            first_word = line.strip().split(" ")[0]                          #extracting r_var                     
+            var=first_word                                                  #extracting var
+            # updation can be of four types, add subtract multiply or divide                
+            if 'bdhaao'in line:                                             #addition
+                line = var + '=' + var + '+' + r_var                        #rephrasing line as a standard python code
+            elif 'ghtaao'in line:                                           #subtraction
+                line = var + '=' + var + '-' + r_var                        #rephrasing line as a standard python code          
+            elif 'guna'in line:                                             #multiplication
+                line = var + '=' + var + '*' + r_var                        #rephrasing line as a standard python code
+            elif 'bhag' in line or 'bhaag' in line:                         #divison
+                if (r_var=="0"):                                                                        
+                    print("maaf kijiye, 0 se bhaag nhi krste")              #divison by zero error
+                    line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
+                else:
+                    line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
+            else:
+                print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do") #if user does not follow semantic-rule
+                                        #indentation thing
+####deciphering operations and operands-----ends
+
         
                     
         ####handling minor syntax things in if statement---starts
