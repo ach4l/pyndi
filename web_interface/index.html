@@ -106,7 +106,9 @@ custom: {
               quill2.enable(true);
               var length = quill2.getLength();
               console.log(length);
+            //   console.log(data_full);
               quill2.deleteText(12, length);
+              quill2.insertEmbed(12,'code-block', "");
               quill2.insertText(12, data);
               quill2.disable();
             
@@ -171,10 +173,13 @@ custom: {
             dataType: 'json'         
           },
           function(data,status){
+            const data_full = "<pre><code id=\"code_python\" class=\"python\">" + data + "</code></pre>"
               quill2.enable(true);
               var length = quill2.getLength();
               console.log(length);
-              quill2.deleteText(12, length);
+              console.log(data_full);
+            //   quill2.deleteText(12, length);
+              quill2.insertEmbed(12,code-block, "");
               quill2.insertText(12, data);
               quill2.disable();
             

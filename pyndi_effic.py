@@ -271,7 +271,7 @@ except Exception as e:
             line = "Gadbad shayad line " + line_no + " mein hai\n"
         error_line_list.append(line)
     error_message = "".join(error_line_list)
-    s = error_message.replace('if',"agar")
+    s = error_message
 
 filename_output = filename.split(".")[0] + "_output.txt"
 output_file = open(filename_output, "w")
