@@ -49,9 +49,7 @@ def translate_keywords(code_pyndi):
     for line in code_pyndi.splitlines():
         line_stripped = re.sub(r'\s+', '', line)
         line_restripped = re.sub(r'(\s|\u180B|\u200B|\u200C|\u200D|\u2060|\uFEFF)+', '', line_stripped)
-        if len(line_restripped)>0:
-            print ("Non White Space")
-            print(line_restripped)
+        if len(line_restripped)>0:            
             line_list.append(line)
     code_python = "\n".join(line_list)
     #minor_translations_(similar_words_into_one_convention)
