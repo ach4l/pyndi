@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hindi Coding for Beginners. Learn Python Programming in Hindi.</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script src="https://cdn.tailwindcss.com"></script>
   
  
@@ -14,23 +16,25 @@
 
 <!-- Include stylesheet -->
 <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
 
 
 
 </head>
-<body>
+<body class="bg-gray-200">
     <div class="content-center mb-2 w-80 ml-2">
-    <span class="text-6xl place-items-center content-center font-bold text-center text-blue-500 hover:text-yellow-500 mb-6 ">py</span>
-    <span class="text-6xl place-items-center content-center font-bold text-center text-yellow-500 hover:text-blue-500 mb-6 -ml-1">ndi</span>
+      <h1 class="text-blue-500" style="font-family: 'Paytone One', sans-serif; font-size: 64px;" >pyndi</h1>
+      <h2 class="text-yellow-500" style="font-family: 'Paytone One', sans-serif;font-size: 21px;" >Hindi Mein Coding!</h2>
     
 </div> 
-<span class="font-bold ml-2 font-serif text-gray-500 text-center mt-8 w-80 justify-self-end">Hindi mein Coding!</span>
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-4 ml-1 mr-3">
     <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 
-<div class="container mb-10 ml-1" >
+<div class="container ml-1" >
     <form name="code_pyndi">
     <div id="editor" class="ql-snow bg-yellow-500 bg-opacity-50" >        
         <pre name = "code_pnd" id="code_pnd" form = "code_pyndi"><code class="python">likh("Hello World")</code></pre>
@@ -41,7 +45,7 @@
     
 </div>
 
-<div class="container mb-10 ml-1 mr-2" contenteditable="False">
+<div class="container ml-1 mr-2" contenteditable="False">
     <div id="editor2" class="ql-snow bg-blue-500 bg-opacity-50" >
         <p class="font-sans font-bold ..."><strong>Python Code</strong> </p>      
         <pre><code id="code_python" class="python">print "Hello World"</code></pre>
@@ -49,7 +53,7 @@
     </div>
 </div>
 
-<div class="container mb-10 ml-1 mr-2">
+<div class="container ml-1 mr-2">
     
     <div id="editor3" class="ql-snow bg-gray-900 bg-opacity-50 text-white" >
         <p class="font-sans font-bold text-white ..."><strong class="text-white">Result</strong> </p>
@@ -215,7 +219,7 @@ myDropDown.attach(quill)
 var quill2 = new Quill('#editor2', {
     modules: {
     syntax: true,              // Include syntax module
-    toolbar: [['code-block']]  // Include button in toolbar
+    toolbar: false  // Include button in toolbar
   },
   theme: 'snow'
   });
@@ -228,7 +232,7 @@ var quill2 = new Quill('#editor2', {
 var quill3 = new Quill('#editor3', {
     modules: {
     syntax: true,              // Include syntax module
-    toolbar: [['code-block']]  // Include button in toolbar
+    toolbar: false   // Include button in toolbar
   },
   theme: 'snow'
   });
