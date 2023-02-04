@@ -1,6 +1,6 @@
-likh("Hello World")
+Likh("Hello Wrld")
 a = 9
-agar a = 9
-    likh "Waah"
-nahi to
+Agar a = 9
+    liKh 'WaAh'
+naHi to
     likh "naah"

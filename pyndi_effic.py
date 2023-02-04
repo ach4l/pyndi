@@ -38,20 +38,47 @@ print(code_pyndi)
 keyword_list=['if','elif','else','while','print','for']
 
 
+def string_replacement(code_python):
+    string_list_double = re.findall(r'"(.*?)"', code_python)
+    string_list_single = re.findall(r"'(.*?)'", code_python)
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")   
+    string_list_total = string_list_double + string_list_single
+    print(string_list_total)
+    string_list = []
+    counter = 0
+    for string_i in string_list_total:
+        
+        print(type(string_i))
+        code_python = code_python.replace(string_i ,"str_"+str(counter))
+        string_list.append(string_i)
+        counter = counter + 1
+    
+                                                                       #collect lines in line_list
+    print(string_list)
+    print(code_python)
+    print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+    return string_list, code_python
 
+
+
+    
 
 
 def translate_keywords(code_pyndi):
+    # Also getting string list out so that it isnt affected
+    string_list, code_python=string_replacement(code_pyndi)
+    code_python = code_python.lower()
     # All the translation happens here
 
     # removing empty lines
     line_list = []
-    for line in code_pyndi.splitlines():
+    for line in code_python.splitlines():
         line_stripped = re.sub(r'\s+', '', line)
         line_restripped = re.sub(r'(\s|\u180B|\u200B|\u200C|\u200D|\u2060|\uFEFF)+', '', line_stripped)
         if len(line_restripped)>0:            
             line_list.append(line)
     code_python = "\n".join(line_list)
+    
     #minor_translations_(similar_words_into_one_convention)
     #maybe a better idea is to use arrays to handle them
     while_words = ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
@@ -95,8 +122,8 @@ def translate_keywords(code_pyndi):
     code_python = code_python.replace("nahin to","else")
 
     
-    return code_python
-code_python = translate_keywords(code_pyndi)
+    return code_python, string_list
+code_python, string_list = translate_keywords(code_pyndi)
 print("####### After Translation #######")
 print(code_python)
 
@@ -106,7 +133,7 @@ print(code_python)
 
 #making_efficient_by_performing_splitting_only_once
 
-def for_and_dec_op_syntax_simpli(code_python):
+def for_and_dec_op_syntax_simpli(code_python,string_list):
     """
     this function takes 'translated' pyndi code and processes for loop
     hr (har) is the keyword used to know that the for loop begins there
@@ -117,12 +144,13 @@ def for_and_dec_op_syntax_simpli(code_python):
     """     
     
     code_python_list=code_python.splitlines()                                          # extracting_lines
-    line_list=[]                                                                        #collect lines in line_list
+    line_list=[]
     
-    #line-wise processing starts here
     
-    for line in code_python_list:
+    for line in code_python_list:        
         #### handling indentation ######
+        
+        line = line.replace("    ","\t")
         number_of_spaces = len(line) - len(line.lstrip())
         line = line.lstrip()
         #### handling print statement----starts
@@ -232,10 +260,15 @@ def for_and_dec_op_syntax_simpli(code_python):
        
         line =  ' '*number_of_spaces*6+line        
         line_list.append(line)                                                  #appending the modified line to line_list
-    code_python = "\n".join(line_list)                                          #code in python!!!
+    code_python = "\n".join(line_list)
+    for counter in range(len(string_list)):
+        code_python = code_python.replace("str_"+str(counter),string_list[counter]) 
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")
+    print(code_python)
+    print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$")                                      #code in python!!!
     return code_python
+    
 
-code_python = for_and_dec_op_syntax_simpli(code_python)
 print("####### After for_and_dec_op #######")
 print(code_python)
 #exec(code_python)

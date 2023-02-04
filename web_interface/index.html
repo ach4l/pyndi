@@ -138,9 +138,35 @@ custom: {
 
   
 
-  hljs.configure({   // optionally configure hljs
-  languages: [ 'python']
+  
+hljs.registerLanguage('pyndi', function() {
+  return {
+    case_insensitive: true, // language is case-insensitive
+    keywords: 'jbtk agar likh',
+    contains: [
+      {
+        className: 'string',
+        begin: '"',
+        end: '"'
+      },
+      hljs.COMMENT(
+        '/\\*', // begin
+        '\\*/', // end
+        {
+          contains: [{
+            className: 'doc',
+            begin: '@\\w+'
+          }]
+        }
+      )
+    ]
+  }
 });
+
+hljs.configure({   // optionally configure hljs
+  languages: [ 'pyndi']
+});
+
 const myButton = new QuillToolbarButton({ 
     text: 'Code Chalao',
     color: 'Yellow',
