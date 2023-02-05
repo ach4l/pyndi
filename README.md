@@ -2,6 +2,7 @@
 ![Pyndi](https://i.postimg.cc/52w5dqk0/pyndi-logo.png)
 
 Web interface : [Pyndi Web App](https://pyndi.netlify.app)
+
 Join Discord : [Invitation](https://discord.gg/tSH8f2vufQ)
 
 The aim of this project is to help new learners to **learn coding in Hindi**. It helps beginners learn coding by simplyfying the language as well as syntax barriers. Since we provide **live translation to python code**, we hope users will learn python quickly as well. It is essentially a wrapper over python which lets users code in 'hindi' and in future other regional languages.
