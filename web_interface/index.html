@@ -9,6 +9,8 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel=“canonical” href=“https://pyndi.netlify.app”>
   <script src="https://cdn.tailwindcss.com"></script>
+  
+
   <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9YCR4WXRZW"></script>
 <script>
@@ -71,7 +73,7 @@
     
     <div id="editor3" class="ql-snow bg-gray-900 bg-opacity-50 text-white" >
         <p class="font-sans font-bold text-white ..."><strong class="text-white">Result</strong> </p>
-        
+        <pre><code id="code_python">Yahan play button ▶ dabane pe output aayega</code></pre>
         
         
     </div>
@@ -79,6 +81,9 @@
 
 </div> 
 </div>
+
+
+
 <footer id="footer">
 <div class="h-20 container ml-1 mr-2 flex flex-col justify-between">
   <p class="flex justify-center font-bold text-gray-500 mb-2">To Contribute</p>
@@ -246,7 +251,7 @@ const myDropDown = new QuillToolbarDropDown({
               quill.insertEmbed(0,'code-block', "");
               quill.insertText(0, data);           
             
-          });
+          }); 
         
     }
 
@@ -279,9 +284,7 @@ var quill3 = new Quill('#editor3', {
   
   
 
-  hljs.configure({   // optionally configure hljs
-  languages: [ 'python']
-});
+  
 quill3.disable();
 
 
@@ -295,7 +298,7 @@ quill3.disable();
 
 
         
-                                   
+                              
                             
      
             
@@ -324,6 +327,8 @@ quill3.disable();
   height: 2.5rem;            /* Footer height */
 }
 
+
+
 .box {
         width: 100%;
         height: 100%;
@@ -341,10 +346,29 @@ quill3.disable();
     .ql-color-\#e60000 {
 	color: rgb(230, 0, 0);
 }
+
+
+
+
+#editor.ql-snow .ql-editor pre.ql-syntax p:before {
+    background-color: #eab308;
+    color: #161204;
+    overflow: visible;
+    counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  border-right: 1px solid #ddd;
+  padding: 0 .5em;
+  margin-right: .5em;
+  color: #888;
+}
+
 #editor.ql-snow .ql-editor pre.ql-syntax {
     background-color: #eab308;
     color: #161204;
     overflow: visible;
+    counter-reset: line;
+  padding-left: 0;
 }
 #editor2.ql-snow .ql-editor pre.ql-syntax {
     background-color: #3d84f4;
@@ -352,7 +376,7 @@ quill3.disable();
     overflow: visible;
 }
 #editor3.ql-snow .ql-editor pre.ql-syntax {
-    background-color: #636a72;
+    background-color: #2e3236;
     color: #f0efeb;
     overflow: visible;
 }
@@ -414,15 +438,35 @@ quill3.disable();
               dataType: 'json'         
             },
             function(data,status){
+              console.log(data.slice(3,4));
+              
                 quill3.enable(true);
                 var length = quill3.getLength();
                 console.log(length);
                 quill3.deleteText(7, length);
-                quill3.insertText(7, data);
+                quill3.insertEmbed(7,'code-block', "");
+                quill3.insertText(7, data);                
                 quill3.disable();
               
             });
             event.preventDefault();
+            $.post("https://ach4l.pythonanywhere.com/pynditranslate",
+          {
+            contentType: 'application/json;charset=UTF-8',
+            data: {"code_pyndi":result},
+            dataType: 'json'         
+          },
+          function(data,status){
+              quill2.enable(true);
+              var length = quill2.getLength();
+              console.log(length);
+            //   console.log(data_full);
+              quill2.deleteText(12, length);
+              quill2.insertEmbed(12,'code-block', "");
+              quill2.insertText(12, data);
+              quill2.disable();
+            
+          });
         // For example, get the selected text and convert it to uppercase:
         // const { index, length } = quill.selection.savedRange
         // const selectedText = quill.getText(index, length)
