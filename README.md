@@ -38,6 +38,32 @@ For now, this readme serves as documentation.
 - Backend - python, flask
 
 
+## Understanding pyndi_effic.py
+
+This is the main backend file which handles conversion from pyndi code to python as well as the exectuion. It is called _effic because it is 'efficient' compared to earlier version. We are essentially processing the pyndi code line by line. That is why we can do live translation to python code in the web interface.
+
+pyndi_effic.py consists of 3 functions : 
+- string_replacement - This function is to help ensure user entered strings stay immutable. it removes all strings and replaces them with a string-identifier. At the right end, we stick back all the user entered strings back in the code.
+- translate keywords - This function does all the translation. In few cases the order of translation is important like for if-else. We provide multiple spelling options to the user as there is no fixed spelling convention for hindi in english script.
+- for_and_dec_op_syntax_simpli - This function does a lot of the heavy lifting. It helps parse different lines of the code as well as simplify syntax.
+
+Here's the psuedocode for the three functions (As on 6 Feb 2023)
+
+### string_replacement
+
+**Input** - Raw Pyndi code
+
+**Output** - Pyndi code with string's replaced by codes, list of strings replaced (string_list)
+
+string_list <- Find all strings between "" or ''  
+counter <- 0  
+for string in string_list:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in Raw Pyndi code, replace string by str_<counter>  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase counter by 1  
+return Pyndi code with string removed, string_list  
+    
+
+
 
 The user can write a code in "pyndi" like the given test_script.pnd. This is then "compiled" by pyndi.py and converted to python code.
 
