@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Pyndi is a new coding language for learning programming in Hindi. It is based on Python">
   <meta name="keywords" content="Coding, Hindi, Programming, python, pyndi,beginners,coding hindi,coding for beginners in hindi, Coding in Hindi, Hindi mein coding, learn programming in hindi, learn coding in hindi, programming language in hindi, python in hindi">
-  <title>Hindi Coding for Beginners. Learn Python Programming in Hindi.</title>
+  <title>Pyndi - Hindi Coding for Beginners. Python based Hindi programming language.</title>
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link rel=“canonical” href=“https://pyndi.netlify.app”>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -53,7 +53,7 @@
 <div class="container ml-1" >
     <form name="code_pyndi">
     <div id="editor" class="ql-snow bg-yellow-500 bg-opacity-50" >        
-        <pre name = "code_pnd" id="code_pnd" form = "code_pyndi"><code class="python">likh("Hello World")</code></pre>
+        <pre name = "code_pnd" id="code_pnd" form = "code_pyndi"><code class="python">likh "Hello World"</code></pre>
                     
     </div>
     
@@ -64,7 +64,7 @@
 <div class="container ml-1 mr-2" contenteditable="False">
     <div id="editor2" class="ql-snow bg-blue-500 bg-opacity-50" >
         <p class="font-sans font-bold ..."><strong>Python Code</strong> </p>      
-        <pre><code id="code_python" class="python">print "Hello World"</code></pre>
+        <pre><code id="code_python" class="python">print("Hello World")</code></pre>
         
     </div>
 </div>
@@ -298,7 +298,27 @@ quill3.disable();
 
 
         
-                              
+<script>
+  window.onload = function() {
+    url_query = "https://ach4l.pythonanywhere.com/pyndiexamples?example=print"
+        $.post(url_query,
+          {
+            contentType: 'application/json;charset=UTF-8',
+            dataType: 'json'         
+          },
+          function(data,status){
+              quill.enable(true);
+              var length = quill.getLength();
+              console.log(length);
+            //   console.log(data_full);
+              quill.deleteText(0, length);
+              quill.insertEmbed(0,'code-block', "");
+              quill.insertText(0, data);           
+            
+          }); 
+        
+};
+</script>                          
                             
      
             
@@ -419,6 +439,10 @@ quill3.disable();
     <script>
     myButton.onClick = function() {
         // Do whatever you want here. You could use this.getValue() or this.setValue() if you wanted.
+        gtag('event', 'executed', {
+          'app_name': 'pyndi',
+          'screen_name': 'Demo'
+        });
         delta = quill.getContents();
         delta_array = delta['ops'];
         let result = '';
