@@ -1,0 +1,19 @@
+Bahut Badhiya! Aapka code sahi se chala 
+jaan itna hai : 100
+Pathan abhi zinda hai
+jaan itna hai : 50.0
+jaan itna hai : 50.0
+Pathan abhi zinda hai
+jaan itna hai : 40.0
+jaan itna hai : 40.0
+Pathan abhi zinda hai
+jaan itna hai : 30.0
+jaan itna hai : 30.0
+Pathan abhi zinda hai
+jaan itna hai : 20.0
+jaan itna hai : 20.0
+Pathan abhi zinda hai
+jaan itna hai : 10.0
+jaan itna hai : 10.0
+Pathan abhi zinda hai
+jaan itna hai : 0.0

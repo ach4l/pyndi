@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import sys
 import time
+import re
 import traceback
 from contextlib import redirect_stdout
 from io import StringIO
+import os
 
 # reading filename from the system arguments coming from command line
 n = len(sys.argv)
@@ -12,7 +14,6 @@ print("First argument :",sys.argv[0])
 print("Filename :",sys.argv[1])
 #filename = input("Enter filename")
 filename = sys.argv[1]
-
 
 
 
@@ -31,178 +32,246 @@ text_file = open(filename, "r")
 code_pyndi = text_file.read() 
 #close file
 text_file.close()
-#print("Pyndi Code")
-#print(code_pyndi)
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+print('------------pyndi code begins here------------')
+print(code_pyndi)
+print('------------pyndi code ends here------------')
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
 
-keyword_list=['if','elif','else:','while','print','for']
-
-
-
-
-
-
- 
+keyword_list=['if','elif','else','while','print','for']
 
 
+def string_replacement(code_python):
+    string_list_double = re.findall(r'"(.*?)"', code_python)
+    string_list_single = re.findall(r"'(.*?)'", code_python)  
+    comment_list = re.findall('#(.+?)\n', code_python)
+    string_list_total = string_list_double + string_list_single+ comment_list
+    string_list = []
+    counter = 0
+    for string_i in string_list_total:
+        code_python = code_python.replace(string_i ,"str_"+str(counter))
+        string_list.append(string_i)
+        counter = counter + 1
+    
+                                                                       #collect lines in line_list
+    return string_list, code_python
+
+
+
+    
 
 
 def translate_keywords(code_pyndi):
-
-
-
+    # Also getting string list out so that it isnt affected
+    string_list, code_python=string_replacement(code_pyndi)
+    code_python = code_python.lower()
     # All the translation happens here
 
-
+    # removing empty lines
+    line_list = []
+    for line in code_python.splitlines():
+        line_stripped = re.sub(r'\s+', '', line)
+        line_restripped = re.sub(r'(\s|\u180B|\u200B|\u200C|\u200D|\u2060|\uFEFF)+', '', line_stripped)
+        if len(line_restripped)>0:            
+            line_list.append(line)
+    code_python = "\n".join(line_list)
+    
     #minor_translations_(similar_words_into_one_convention)
     #maybe a better idea is to use arrays to handle them
-    code_python = code_pyndi.replace("jabtk","jbtk")
-    code_python = code_python.replace("jbtak","jbtk")
-    code_python = code_python.replace("jabtak","jbtk")
-    code_python = code_python.replace("agr","agar")
-    code_python = code_python.replace("nhi to","nahin to")
-    code_python = code_python.replace("nhin to","nahin to")
-    code_python = code_python.replace("nahi to","nahin to")
-    code_python = code_python.replace("naahi to","nahin to")
-    code_python = code_python.replace("ydi","yadi")
+    while_words = ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
+    while_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, while_words)))
+    code_python = while_regex.sub("while", code_python)
+
+    nahin_words = ["nhi to","nhin to","nahi to","naahi to"]
+    nahin_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, nahin_words)))
+    code_python = nahin_regex.sub("nahin to", code_python)
+
+    bdhaao_words = ["badhao","bdhao","bdha","bdhaa","jodo","jod","jdo"]
+    bdhaao_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, bdhaao_words)))
+    code_python = bdhaao_regex.sub("bdhaao", code_python)
+
+    ghtaao_words = ["ghtao","kam kro","kam krdo","km kro","km krdo","ghatao","ghta"]
+    ghtaao_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, ghtaao_words)))
+    code_python = ghtaao_regex.sub("ghtaao", code_python)
+
+    bhaag_words = ["bhag","vibhajit","wibhajit","vibhajan","wibhajan","bhaag"]
+    bhaag_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, bhaag_words)))
+    code_python = bhaag_regex.sub("bhaag", code_python)
+
+    print_words = ["likh","likho","bol","dikha","dikhao","dikhaao"]
+    print_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, print_words)))
+    code_python = print_regex.sub("print", code_python)
+
+    barabar_words = ["barabar","brabr","barabr"]
+    barabar_regex = re.compile(r'\b%s\b' % r'\b|\b'.join(map(re.escape, barabar_words)))
+    code_python = barabar_regex.sub("=", code_python)
+
+    
+    code_python = code_python.replace("agr","agar")    
+    code_python = code_python.replace("ydi","agar")
+    code_python = code_python.replace("yadi","agar")
     code_python = code_python.replace("har","hr")
-    code_python = code_python.replace("lekar","lekr")
-    code_python = code_python.replace("bdhao","bdhaao")
-    code_python = code_python.replace("bdha","bdhaao")
-    code_python = code_python.replace("jodo","bdhaao")
-    code_python = code_python.replace("ghtao","ghtaao")
-    code_python = code_python.replace("ghtao","ghtaao")
-    code_python = code_python.replace("kam kro","ghtaao")
-    code_python = code_python.replace("kam krdo","ghtaao")
-    code_python = code_python.replace("km kro","ghtaao")
-    code_python = code_python.replace("km krdo","ghtaao")
-    code_python = code_python.replace("bhag","bhaag")
-    code_python = code_python.replace("bhiwajit","bhaag")
-    code_python = code_python.replace("bhiwajan","bhaag")
-    code_python = code_python.replace("bhiwajn","bhaag")
+    code_python = code_python.replace("lekar","lekr")    
 
-    # print statement
-    code_python = code_python.replace("likh","print")
-    code_python = code_python.replace("bol","print")
-    code_python = code_python.replace("dikha","print")
-    code_python = code_python.replace("dikhao","print")
-    code_python = code_python.replace("dikhaao","print")
-
-    # if else conditions
+    # if else conditions **** The order of replacement here needs to be maintained ****
     code_python = code_python.replace("nahin to agar","elif")
     code_python = code_python.replace("agar","if")
-    code_python = code_python.replace("yadi","if")
     code_python = code_python.replace("nahin to","else")
 
-    #while loop
-    code_python = code_python.replace("jbtk","while")
-    return code_python
+    
+    return code_python, string_list
+code_python, string_list = translate_keywords(code_pyndi)
 
-code_python = translate_keywords(code_pyndi)
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+print('------------code after translation begins here------------')
+print(code_python)
+print('------------code after translation ends here------------')
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
 
 
 
 
 
-# for_loop_numbers
+#making_efficient_by_performing_splitting_only_once
 
-def for_numbers_translate(code_python):
+def for_and_dec_op_syntax_simpli(code_python,string_list):
     """
     this function takes 'translated' pyndi code and processes for loop
     hr (har) is the keyword used to know that the for loop begins there
     currently only works for numbers
-    need to generalise it for all for loop    
+    need to generalise it for all for loop 
+    then deciphers the operations and operands present in all the lines
+    finally some syntax simplification stuff
     """     
-    code_python_list=code_python.splitlines()
-    line_list_for=[]
-    for line in code_python_list:
-        if 'hr' in line:
-            word_list=line.strip().split(' ')
-            hr_index=word_list.index('hr')
+    
+    code_python_list=code_python.splitlines()                                          # extracting_lines
+    line_list=[]
+    for line in code_python_list:        
+        #### handling indentation ######
+        
+        line = line.replace("    ","\t")
+        number_of_spaces = len(line) - len(line.lstrip())
+        line = line.lstrip()
+        #### handling print statement----starts
+
+        # just handling no brackets for now
+
+        if "print" in line:   
+            if line[5] == " ":
+                line = line.replace("print ","print(")
+                line = line + ')'
+            
+
+        #### handling print statement----ends
+        
+        
+        
+        #### handling for statement----starts
+        
+        if 'hr' in line:                                                            #seeking if it has 'hr'; if so it has to be 'if' statement
+            word_list=line.strip().split(' ')                                       #splitting line
+            hr_index=word_list.index('hr')                                          #where is 'hr'?
             var=word_list[hr_index+1]
-            low_limit=word_list[0]
-            upp_limit=word_list[3]
-            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'        
-        line_list_for.append(line) 
-    code_python = "\n".join(line_list_for) 
-    return code_python
-code_python = for_numbers_translate(code_python)
+            low_limit=word_list[0]                                                  #extracting the lower_limit of variable
+            upp_limit=word_list[3]                                                  #extracting the upper_limit of variable
+            line='for '+var+' in range('+ low_limit + ','+upp_limit+ '):'
+                                                  #rephrasing line as a standard python code
+       #### handling for statement----ends
+            
+        ####deciphering operations and operands-----starts
+                                              
 
+    
+        
+    
+    
+           ### if these three conditions are not met, we assume that the line contains statement for updating a variable
+        ############# IMPORTANT - THESE CONDITIONS MIGHT BREAK DOWN AS NEW FUNCTIONS ARE ADDED ################
+        if 'bdhaao' in line or 'ghtaao'in line or 'guna'in line or 'bhaag' in line:                                       ##(3) no print statement
+            # Need number of spaces to keep track of indentation
+            # currently only works when indentation is done using tab
+                            #indentation thing
+            ## var is the variable and r_var is the number by which it needs to be updated by
+            ## assuming semantic-rule is followed (specified in readme)
+            
+            r_var=line.strip().split(" ")[2]
+            first_word = line.strip().split(" ")[0]                          #extracting r_var                     
+            var=first_word                                                  #extracting var
+            # updation can be of four types, add subtract multiply or divide                
+            if 'bdhaao'in line:                                             #addition
+                line = var + '=' + var + '+' + r_var                        #rephrasing line as a standard python code
+            elif 'ghtaao'in line:                                           #subtraction
+                line = var + '=' + var + '-' + r_var                        #rephrasing line as a standard python code          
+            elif 'guna'in line:                                             #multiplication
+                line = var + '=' + var + '*' + r_var                        #rephrasing line as a standard python code
+            elif 'bhaag' in line:                         #divison
+                if (r_var=="0"):                                                                        
+                    print("maaf kijiye, 0 se bhaag nhi krste")              #divison by zero error
+                    line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
+                else:
+                    line = var + '=' + var + '/' + r_var                   #rephrasing line as a standard python code
+            else:
+                print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do") #if user does not follow semantic-rule
+                                        #indentation thing
+####deciphering operations and operands-----ends
 
-
-#deciphering_operations_and_operands
-
-def dec_op(code_python):
-    #line-segmentation-while
-    code_python_lines=code_python.splitlines()
-    line_list_dec_op = []
-    for line in code_python_lines:
-        first_word = line.strip().split(" ")[0]    
-        # if these three conditions are not met, we assume that the line contains statement for updating a variable
-        if (first_word not in keyword_list):
-            if ('=' not in line):
-                if "print" not in line:
-                    # Need number of spaces to keep track of indentation
-                    # currently only works when indentation is done using tab
-                    number_of_spaces = len(line) - len(line.lstrip())
-                    # var is the variable and r_var is the number by which it needs to be updated by            
-                    r_var=line.strip().split(" ")[2]                            
-                    var=first_word
-                    # reassignment can be of four types, add subtract multiply or divide                
-                    if 'bdhaao'in line:
-                        line = var + '=' + var + '+' + r_var
-                    elif 'ghtaao'in line:
-                        line = var + '=' + var + '-' + r_var
-                    elif 'guna'in line:
-                        line = var + '=' + var + '*' + r_var
-                    elif 'bhag' in line or 'bhaag' in line:
-                        if (r_var=="0"):
-                            print('@@@@@@@@@@@@@@@@@@@@@')
-                            print("maaf kijiye, 0 se bhaag nhi krste")
-                            print('@@@@@@@@@@@@@@@@@@@@@')
-                            line = var + '=' + var + '/' + r_var
-                        else:
-                            line = var + '=' + var + '/' + r_var
-                    else:
-                        print(line + " ko is trh se likh bhai: a ko 1 se bdhaa do")
-                    line =  ' '*number_of_spaces*6+line
-        line_list_dec_op.append(line)       
-    code_python = "\n".join(line_list_dec_op)
-    return code_python
-
-code_python = dec_op(code_python)
-
-
-
-def syntax_simplifier(code_python):
-    # simplyfying comparison operators == is not very intuitive
-    code_python_lines=code_python.splitlines()
-    line_list = []
-    for line in code_python_lines:
-        if 'if' in line:
+        
+                    
+        ####handling minor syntax things in if statement---starts
+        
+        ###(based on the observation that only comparison operator should follow if/elif statements)  
+          
+        if 'if' in line:                                                              
             # comparison operator two different ways      
-            if ("barabar h" in line):
-                line=line.replace("barabar h",'==')
+            if ("barabar" in line):
+                line=line.replace("barabar",'==')
             if  line.count('=')==1:
                 line=line.replace("=","==")
-        # Removing the need for colon in if for and while statements
+            line = line.lstrip()
+            
+                
+        ### Removing the need for colon in if, for and while statements
         if 'for' in line or 'while' in line or 'if' in line or 'elif' in line or 'else' in line:
             if line.count(':')==0:
                 line=line+':'
-        line_list.append(line)
-	  
+                
+       ####handling minor syntax things in if statement---ends
+       
+       
+       
+       
+
+       ####refining_the_print_statement_part_2-----starts
+       #### displaying_variable's_name_alongwith_value
+       
+        if 'print' in line:                                             
+            if '"' not in line:                                  #variable written in print's argument
+                if "'" not in line:
+                    obc_index=line.rfind('(')
+                    cbc_index=line.rfind(')')
+                    var_name=line[obc_index+1:cbc_index]                                #extracting variable's name
+                    line = 'print("' + var_name + ' itna hai :",' +var_name + ')'       #refined print statement
+                
+                
+        ####refining_the_print_statement_part_2-----ends
+       
+       
+       
+        line =  ' '*number_of_spaces*6+line        
+        line_list.append(line)                                                  #appending the modified line to line_list
     code_python = "\n".join(line_list)
-    return(code_python)
+    for counter in range(len(string_list)):
+        code_python = code_python.replace("str_"+str(counter),string_list[counter]) 
 
-code_python = syntax_simplifier(code_python)
-
-
-
-
-
-
-# Final Python code
-print("Final Python Code")
+    return code_python
+    
+code_python=for_and_dec_op_syntax_simpli(code_python,string_list)
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+print('------------Final python code begins here------------')
 print(code_python)
+print('------------Final python code ends here------------')
+print('$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$')
+exec(code_python)
 
 # Saving the python code in a .py file just in case the user wants it
 filename_py = filename.split(".")[0] + ".py"
@@ -210,8 +279,8 @@ py_file = open(filename_py, "w")
 n = py_file.write(code_python)
 py_file.close()
 
-# Executing the translated python code
-print("Code chalane pe ye mila")
+
+
 f = StringIO()
 try:
     with redirect_stdout(f):
@@ -233,7 +302,7 @@ except Exception as e:
             line = "Gadbad shayad line " + line_no + " mein hai\n"
         error_line_list.append(line)
     error_message = "".join(error_line_list)
-    s = error_message.replace('if',"agar")
+    s = error_message
 
 filename_output = filename.split(".")[0] + "_output.txt"
 output_file = open(filename_output, "w")
