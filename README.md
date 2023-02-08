@@ -12,7 +12,7 @@ This repository contain both the web interface as well as the 'compiler' code wh
 For now, this readme serves as documentation.
 
 ## Table of contents
-* [General Info](link)
+* [General Info](https://github.com/ach4l/pyndi#important-files)
 
     - [Important Files](https://github.com/ach4l/pyndi#important-files)
     - [Features of Pyndi](https://github.com/ach4l/pyndi#features-of-pyndi)
@@ -55,9 +55,9 @@ For now, this readme serves as documentation.
 
 ## Understanding pyndi.py
 
-This is the main backend file which handles conversion from pyndi code to python as well as the exectuion. It is called _effic because it is 'efficient' compared to earlier version. We are essentially processing the pyndi code line by line. That is why we can do live translation to python code in the web interface.
+This is the main backend file which handles conversion from pyndi code to python as well as the exectuion. We are essentially processing the pyndi code line by line, i.e. each line is independent. That is why we can do live translation to python code in the web interface.
 
-pyndi_effic.py consists of 3 functions : 
+pyndi.py consists of 3 functions : 
 - string_replacement - This function is to help ensure user entered strings stay immutable. it removes all strings and replaces them with a string-identifier. At the right end, we stick back all the user entered strings back in the code.
 - translate keywords - This function does all the translation. In few cases the order of translation is important like for if-else. We provide multiple spelling options to the user as there is no fixed spelling convention for hindi in english script.
 - for_and_dec_op_syntax_simpli - This function does a lot of the heavy lifting. It helps parse different lines of the code as well as simplify syntax.
