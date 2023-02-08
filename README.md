@@ -85,25 +85,25 @@ return Pyndi code with string removed, string_list
 
 The following replacement happens :
 
-while : ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
-nahin : ["nhi to","nhin to","nahi to","naahi to"]
-bdhaao_words : ["badhao","bdhao","bdha","bdhaa","jodo","jod","jdo"]
-ghtaao : ["ghtao","kam kro","kam krdo","km kro","km krdo","ghatao","ghta"]
-bhaag : ["bhag","vibhajit","wibhajit","vibhajan","wibhajan","bhaag"]
-print_words : ["likh","likho","bol","dikha","dikhao","dikhaao"]
-barabar_words : ["barabar","brabr","barabr"]
+- while : ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
+- nahin : ["nhi to","nhin to","nahi to","naahi to"]
+- bdhaao_words : ["badhao","bdhao","bdha","bdhaa","jodo","jod","jdo"]
+- ghtaao : ["ghtao","kam kro","kam krdo","km kro","km krdo","ghatao","ghta"]
+- bhaag : ["bhag","vibhajit","wibhajit","vibhajan","wibhajan","bhaag"]
+- print_words : ["likh","likho","bol","dikha","dikhao","dikhaao"]
+- barabar_words : ["barabar","brabr","barabr"]
 
-"agr":"agar"  
-"ydi":"agar"
-"yadi","agar"
+- "agr":"agar"  
+- "ydi":"agar"
+- "yadi","agar"
 
-"har","hr"
-"lekar","lekr"    
+- "har","hr"
+- "lekar","lekr"    
 
 #### if else conditions **** The order of replacement here needs to be maintained ****
-"nahin to agar":"elif"
-"agar":"if"
-"nahin to":"else"
+- "nahin to agar":"elif"
+- "agar":"if"
+- "nahin to":"else"
 
 ### for_and_dec_op_syntax_simpli
 
