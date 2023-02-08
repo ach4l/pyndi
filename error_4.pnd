@@ -1,0 +1,8 @@
+jaan = 100      # Tum mein kitni jaan hai?
+jbtk jaan > 0:
+    dikha "Pathan abhi zinda hai"
+    agr jaan > 50:
+        jaan ko 2 se bhaag karo
+    nahin to:
+        jaan ko 10 se ghatao
+    likh jaan

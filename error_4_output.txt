@@ -1,0 +1,5 @@
+Kuch to gadbad hai. Daya, pata karo!
+Gadbad shayad line 3 mein hai
+    print "str_0"
+          ^
+SyntaxError: Missing parentheses in call to 'print'. Did you mean print("str_0")?
