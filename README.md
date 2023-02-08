@@ -24,7 +24,7 @@ For now, this readme serves as documentation.
 
     - [String Replacement](https://github.com/ach4l/pyndi#string_replacement)
     - [Translate Keywords](https://github.com/ach4l/pyndi#translate_keywords)
-    - [Tech Stack](link)
+    - [Semantics and parser](https://github.com/ach4l/pyndi#for_and_dec_op_syntax_simpli)
 
 ### Important Files
 - Web-interface/index.html - The single page application
