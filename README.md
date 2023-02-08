@@ -11,20 +11,35 @@ This repository contain both the web interface as well as the 'compiler' code wh
 
 For now, this readme serves as documentation.
 
+## Table of contents
+* [General Info](link)
+
+    - [Important Files](https://github.com/ach4l/pyndi#important-files)
+    - [Features of Pyndi](https://github.com/ach4l/pyndi#features-of-pyndi)
+    - [Features of Web Interface](https://github.com/ach4l/pyndi#features-of-web-interface)
+    - [Future Developments](https://github.com/ach4l/pyndi#future-developments)
+    - [Tech Stack](https://github.com/ach4l/pyndi#tech-stack)
+
+* [Understanding pyndi.py](https://github.com/ach4l/pyndi#understanding-pyndipy)
+
+    - [String Replacement](https://github.com/ach4l/pyndi#string_replacement)
+    - [Translate Keywords](https://github.com/ach4l/pyndi#translate_keywords)
+    - [Tech Stack](link)
+
 ### Important Files
 - Web-interface/index.html - The single page application
-- pyndi_effic.py - All the translation and syntax simplification happen here
+- pyndi.py - All the translation and syntax simplification happen here
 - automatic_tester.py - Any modification to pyndi effic can be tested by running them on test files and see if none of the output changes
-
-### Features of Web Interface
-- Pyndi Editor online (mobile friendly)
-- Live Translation to Python Code
 
 ### Features of Pyndi
 - Flexible Hindi Vocabulary (tolerant to certain spelling variations)
 - case-insensitive
 - Flexible and tolerant syntax
 - Helpful error messages in Hindi
+
+### Features of Web Interface
+- Pyndi Editor online (mobile friendly)
+- Live Translation to Python Code
 
 ### Future Developments
 - Gamified tutorial for learning
@@ -38,7 +53,7 @@ For now, this readme serves as documentation.
 - Backend - python, flask
 
 
-## Understanding pyndi_effic.py
+## Understanding pyndi.py
 
 This is the main backend file which handles conversion from pyndi code to python as well as the exectuion. It is called _effic because it is 'efficient' compared to earlier version. We are essentially processing the pyndi code line by line. That is why we can do live translation to python code in the web interface.
 
@@ -58,10 +73,44 @@ Here's the psuedocode for the three functions (As on 6 Feb 2023)
 string_list <- Find all strings between "" or ''  
 counter <- 0  
 for string in string_list:  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in Raw Pyndi code, replace string by str_<counter>  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in Raw Pyndi code, replace string by str_\<counter\>  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase counter by 1  
 return Pyndi code with string removed, string_list  
-    
+
+### translate_keywords
+
+**Input** - Pyndi code with strings and comments removed
+
+**Output** - Pyndi code with keywords translated to python
+
+The following replacement happens :
+
+while : ["jabtk","jbtk","jbtak","jabtak","jab tak","jb tk","jb tak","jab tk"]
+nahin : ["nhi to","nhin to","nahi to","naahi to"]
+bdhaao_words : ["badhao","bdhao","bdha","bdhaa","jodo","jod","jdo"]
+ghtaao : ["ghtao","kam kro","kam krdo","km kro","km krdo","ghatao","ghta"]
+bhaag : ["bhag","vibhajit","wibhajit","vibhajan","wibhajan","bhaag"]
+print_words : ["likh","likho","bol","dikha","dikhao","dikhaao"]
+barabar_words : ["barabar","brabr","barabr"]
+
+"agr":"agar"  
+"ydi":"agar"
+"yadi","agar"
+
+"har","hr"
+"lekar","lekr"    
+
+#### if else conditions **** The order of replacement here needs to be maintained ****
+"nahin to agar":"elif"
+"agar":"if"
+"nahin to":"else"
+
+### for_and_dec_op_syntax_simpli
+
+**Input** - Pyndi code with strings and comments removed
+
+**Output** - Pyndi code with keywords translated to python
+
 
 
 
