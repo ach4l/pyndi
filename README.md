@@ -115,16 +115,17 @@ The main purpose of this function is to help in syntax simplication as well as p
 
 
 for each line in code after keywords translated:
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 'print' in line:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add bracket if there is no bracket
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If printing name of a variable, add var_name itna hai
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 'hr' in line:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming Variable name is after hr
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming lower limit is first word of line
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming upper limit is third word of line
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Create line ( for variable_name in range(lower_limit,upper_limit) )
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase counter by 1  
-return Pyndi code with string removed, string_list  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 'print' in line:  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Add bracket if there is no bracket  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; If printing name of a variable, add var_name itna hai   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if 'hr' in line:   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming Variable name is after hr   
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming lower limit is first word of line  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming upper limit is third word of line  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Create line ( for variable_name in range(lower_limit,upper_limit) )  
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase counter by 1    
+return Pyndi code with string removed, string_list    
 
 
 The user can write a code in "pyndi" like the given test_script.pnd. This is then "compiled" by pyndi.py and converted to python code.
