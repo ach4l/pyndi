@@ -123,8 +123,7 @@ for each line in code after keywords translated:
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming Variable name is after hr   
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming lower limit is first word of line  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Assuming upper limit is third word of line  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Create line ( for variable_name in range(lower_limit,upper_limit) )  
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;increase counter by 1    
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Create line ( for variable_name in range(lower_limit,upper_limit) )     
 return Pyndi code with string removed, string_list    
 
 
@@ -135,33 +134,10 @@ The error messages are also in Hindi to make it more understandable for the user
 Still under development phase.
 
 
-
-
-
-
-Pre-processing steps:
-1. Removed all the blank lines from the pyndi code
-
 Minor semantics:
 1. user may write agar or agr, not going to make a difference, nahin/nhi/nahi; jbtk/jabtk/jbtak all interpreted identically.
 
 Semantics:
-
-1. Keywords: if, elif, else, while, print, for
-
-2. Vocabulary
- 
-
-"if" :=  "agar"/"agr"/"yadi"/"ydi"
-
-"elif":= "nahi to agar"
-
-"else":= "nahi to"
-
-"print":="likh"/"bol"/"dikha"
-
-"while":= "jabtak"/"jbtk"/"jabtk"/"jbtak"
-"for":= "hr"
 
 For any re-assignment operations, 
 
