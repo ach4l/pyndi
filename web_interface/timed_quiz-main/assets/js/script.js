@@ -1,5 +1,5 @@
 // List of Questions and Answers
-var words = ["pyndi","Joshimath","coding","mazaa","agar","nahi to","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit"]
+var words = ["pyndi","Joshimath","coding","mazaa","agar","nahi","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit","Dipika","Nawal","Sneha"]
 
 
 // Get Dom Elements
