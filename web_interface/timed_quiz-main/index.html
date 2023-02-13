@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+
+        
+        
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pyndi is a new coding language for learning programming in Hindi. It is based on Python">
+  <meta name="keywords" content="Coding, Hindi, Programming, python, pyndi,beginners,coding hindi,coding for beginners in hindi, Coding in Hindi, Hindi mein coding, learn programming in hindi, learn coding in hindi, programming language in hindi, python in hindi">
+  <title>Pyndi - Hindi Coding for Beginners. Python based Hindi programming language.</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel=“canonical” href=“https://pyndi.netlify.app”>
+  <script src="https://cdn.tailwindcss.com"></script>
+ 
+  
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9YCR4WXRZW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9YCR4WXRZW');
+</script>
+  
+ 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+  <link rel="stylesheet"
+  href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+
+<!-- Include stylesheet -->
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+
+
+
+</head>
+    <body>
+      <main class="quiz">
+        <header>
+            
+            <div tabindex="0" class="content-center mb-2 w-80 ml-2">
+                <h1 class="text-blue-500" style="font-family: 'Paytone One', sans-serif; font-size: 64px;" ><a href="https://pyndi.netlify.app"> pyndi</a></h1>
+                <h2 class="text-yellow-500" style="font-family: 'Paytone One', sans-serif;font-size: 21px;" >Hindi Mein Coding!</h2>    
+            </div> 
+        
+            
+        </header>
+        
+        
+            <div id="quiz-start">
+                <div class="landing" id="start-screen">
+                    
+                    <div class="flex h-[80vh]">
+                        <div class="m-auto"> 
+                            <button id="start" class="h-25 w-75 text-5xl bg-blue-500 hover:bg-blue-700 text-gray-200 hover:text-yellow-500 flex items-center font-bold py-2 px-4 rounded">
+                                Start Game
+                            </button>
+                        </div>
+                    </div>
+                            
+                      
+                </div>
+            </div>
+
+            <div class="hide" id="questions">
+                <div class="timer justify-center flex items-center">
+                    
+                    <div class="countdown">
+                        <svg viewBox="-50 -50 100 100" stroke-width="10">
+                          <circle r="45"></circle>
+                          <circle r="45" stroke-dasharray="282.7433388230814" stroke-dashoffset="282.7433388230814px"></circle>
+                        </svg>
+                    </div>
+                </div>
+                
+                <h2 class="text-lg mr-2 ml-2 mb-2 font-bold" id="question-words"></h2>
+                <div class="options" id="options"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 ml-1 mr-3">
+                    <!-- Include the Quill library -->
+                <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+                
+                <div class="container ml-1" >
+                    <form name="code_pyndi">
+                    <div id="editor" class="ql-snow bg-yellow-500 bg-opacity-50" >        
+                        <pre name = "code_pnd" id="code_pnd" form = "code_pyndi"><code class="python"></code></pre>
+                                    
+                    </div>
+                    
+                </form>
+                    
+                </div>
+                
+                <div class="container ml-1 mr-2">
+                    
+                  <div id="editor3" class="ql-snow bg-gray-900 bg-opacity-50 text-white" >
+                      <p class="font-sans font-bold text-white ..."><strong class="text-white">Result</strong> </p>
+                      <pre><code id="code_python">Yahan play button ▶ dabane pe output aayega</code></pre>
+                      
+                      
+                  </div>
+                </div>
+                
+                <div id="feedback" class="feedback text-lg font-extrabold"></div>
+                <div id="score" class="score text-lg font-extrabold"></div>
+                
+                </div>
+            </div>
+
+            <div class="hide" id="quiz-end">
+              <div class="flex h-[80vh]">
+                <div class="m-auto"> 
+                  <div class="object-contain rounded overflow-hidden shadow-lg bg-gray-200 mb-2 ml-2 mr-2 border-2 border-yellow-500 justify-center">
+            
+            
+                  
+                  
+                    <h2>Ho gaya</h2>
+                    <p>Aapka score hai : <span id="score-final"></span></p>
+                    <p>Apna name likhiye: <input type="text" id="name" max="3" />
+                      <a href="highscores.html">
+                        <button class="h-7 w-75 text-lg bg-blue-500 hover:bg-blue-700 text-gray-200 hover:text-yellow-500 flex items-center font-bold py-2 px-4 rounded" href="highscores.html" id="submit-score">Submit</button>
+                      </a>
+                    </p>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            
+        </main>
+        
+<!-- Initialize Quill editor -->
+<script src="https://cdn.jsdelivr.net/gh/T-vK/DynamicQuillTools@master/DynamicQuillTools.js"></script>
+<script>
+
+
+
+
+
+
+
+  var quill = new Quill('#editor', {
+    modules: {
+        
+    syntax: true,              // Include syntax module
+    toolbar: [[]]  // Include button in toolbar
+  },
+  theme: 'snow'
+  });
+  quill.format('color', 'yellow');
+  quill.root.setAttribute('spellcheck', false);
+  
+
+
+
+  
+
+  
+hljs.registerLanguage('pyndi', function() {
+  return {
+    case_insensitive: true, // language is case-insensitive
+    keywords: 'jbtk agar likh',
+    contains: [
+      {
+        className: 'string',
+        begin: '"',
+        end: '"'
+      },
+      hljs.COMMENT(
+        '/\\*', // begin
+        '\\*/', // end
+        {
+          contains: [{
+            className: 'doc',
+            begin: '@\\w+'
+          }]
+        }
+      )
+    ]
+  }
+});
+
+hljs.configure({   // optionally configure hljs
+  languages: [ 'pyndi']
+});
+
+const myButton = new QuillToolbarButton({ 
+    type: 'button',
+    text: 'Code Chalao',
+    color: 'Yellow',
+    icon: '<svg viewBox="0 0 18 18"> <path class="ql-stroke" d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"></path></svg>'
+})
+
+
+
+
+myButton.attach(quill) 
+
+ 
+
+
+
+var quill3 = new Quill('#editor3', {
+    modules: {
+    syntax: true,              // Include syntax module
+    toolbar: false   // Include button in toolbar
+  },
+  theme: 'snow'
+  });
+  quill3.format('color', 'yellow');
+  quill3.root.setAttribute('spellcheck', false);
+  
+  
+
+  
+quill3.disable();
+
+
+
+
+
+
+</script>
+
+    
+
+        <script src="./assets/js/script.js"></script>
+        <style>
+            .hide {
+    display: none;
+}
+#editor.ql-snow .ql-editor pre.ql-syntax {
+    background-color: #eab308;
+    color: #161204;
+    overflow: visible;
+    counter-reset: line;
+  padding-left: 0;
+}
+.countdown {
+  display: grid;
+  margin: 1em auto;
+  width: 10em;
+  height: 10em;
+}
+.countdown::after {
+  grid-column: 1;
+  grid-row: 1;
+  place-self: center;
+  font: 2.5em/2 ubuntu mono, consolas, monaco, monospace;
+  animation: num 120s steps(1) infinite;
+  content: "0:" counter(s, decimal-leading-zero);
+}
+
+@keyframes num {
+  0% {
+    counter-reset: s 120;
+  }
+  0.8333333333% {
+    counter-reset: s 119;
+  }
+  1.6666666667% {
+    counter-reset: s 118;
+  }
+  2.5% {
+    counter-reset: s 117;
+  }
+  3.3333333333% {
+    counter-reset: s 116;
+  }
+  4.1666666667% {
+    counter-reset: s 115;
+  }
+  5% {
+    counter-reset: s 114;
+  }
+  5.8333333333% {
+    counter-reset: s 113;
+  }
+  6.6666666667% {
+    counter-reset: s 112;
+  }
+  7.5% {
+    counter-reset: s 111;
+  }
+  8.3333333333% {
+    counter-reset: s 110;
+  }
+  9.1666666667% {
+    counter-reset: s 109;
+  }
+  10% {
+    counter-reset: s 108;
+  }
+  10.8333333333% {
+    counter-reset: s 107;
+  }
+  11.6666666667% {
+    counter-reset: s 106;
+  }
+  12.5% {
+    counter-reset: s 105;
+  }
+  13.3333333333% {
+    counter-reset: s 104;
+  }
+  14.1666666667% {
+    counter-reset: s 103;
+  }
+  15% {
+    counter-reset: s 102;
+  }
+  15.8333333333% {
+    counter-reset: s 101;
+  }
+  16.6666666667% {
+    counter-reset: s 100;
+  }
+  17.5% {
+    counter-reset: s 99;
+  }
+  18.3333333333% {
+    counter-reset: s 98;
+  }
+  19.1666666667% {
+    counter-reset: s 97;
+  }
+  20% {
+    counter-reset: s 96;
+  }
+  20.8333333333% {
+    counter-reset: s 95;
+  }
+  21.6666666667% {
+    counter-reset: s 94;
+  }
+  22.5% {
+    counter-reset: s 93;
+  }
+  23.3333333333% {
+    counter-reset: s 92;
+  }
+  24.1666666667% {
+    counter-reset: s 91;
+  }
+  25% {
+    counter-reset: s 90;
+  }
+  25.8333333333% {
+    counter-reset: s 89;
+  }
+  26.6666666667% {
+    counter-reset: s 88;
+  }
+  27.5% {
+    counter-reset: s 87;
+  }
+  28.3333333333% {
+    counter-reset: s 86;
+  }
+  29.1666666667% {
+    counter-reset: s 85;
+  }
+  30% {
+    counter-reset: s 84;
+  }
+  30.8333333333% {
+    counter-reset: s 83;
+  }
+  31.6666666667% {
+    counter-reset: s 82;
+  }
+  32.5% {
+    counter-reset: s 81;
+  }
+  33.3333333333% {
+    counter-reset: s 80;
+  }
+  34.1666666667% {
+    counter-reset: s 79;
+  }
+  35% {
+    counter-reset: s 78;
+  }
+  35.8333333333% {
+    counter-reset: s 77;
+  }
+  36.6666666667% {
+    counter-reset: s 76;
+  }
+  37.5% {
+    counter-reset: s 75;
+  }
+  38.3333333333% {
+    counter-reset: s 74;
+  }
+  39.1666666667% {
+    counter-reset: s 73;
+  }
+  40% {
+    counter-reset: s 72;
+  }
+  40.8333333333% {
+    counter-reset: s 71;
+  }
+  41.6666666667% {
+    counter-reset: s 70;
+  }
+  42.5% {
+    counter-reset: s 69;
+  }
+  43.3333333333% {
+    counter-reset: s 68;
+  }
+  44.1666666667% {
+    counter-reset: s 67;
+  }
+  45% {
+    counter-reset: s 66;
+  }
+  45.8333333333% {
+    counter-reset: s 65;
+  }
+  46.6666666667% {
+    counter-reset: s 64;
+  }
+  47.5% {
+    counter-reset: s 63;
+  }
+  48.3333333333% {
+    counter-reset: s 62;
+  }
+  49.1666666667% {
+    counter-reset: s 61;
+  }
+  50% {
+    counter-reset: s 60;
+  }
+  50.8333333333% {
+    counter-reset: s 59;
+  }
+  51.6666666667% {
+    counter-reset: s 58;
+  }
+  52.5% {
+    counter-reset: s 57;
+  }
+  53.3333333333% {
+    counter-reset: s 56;
+  }
+  54.1666666667% {
+    counter-reset: s 55;
+  }
+  55% {
+    counter-reset: s 54;
+  }
+  55.8333333333% {
+    counter-reset: s 53;
+  }
+  56.6666666667% {
+    counter-reset: s 52;
+  }
+  57.5% {
+    counter-reset: s 51;
+  }
+  58.3333333333% {
+    counter-reset: s 50;
+  }
+  59.1666666667% {
+    counter-reset: s 49;
+  }
+  60% {
+    counter-reset: s 48;
+  }
+  60.8333333333% {
+    counter-reset: s 47;
+  }
+  61.6666666667% {
+    counter-reset: s 46;
+  }
+  62.5% {
+    counter-reset: s 45;
+  }
+  63.3333333333% {
+    counter-reset: s 44;
+  }
+  64.1666666667% {
+    counter-reset: s 43;
+  }
+  65% {
+    counter-reset: s 42;
+  }
+  65.8333333333% {
+    counter-reset: s 41;
+  }
+  66.6666666667% {
+    counter-reset: s 40;
+  }
+  67.5% {
+    counter-reset: s 39;
+  }
+  68.3333333333% {
+    counter-reset: s 38;
+  }
+  69.1666666667% {
+    counter-reset: s 37;
+  }
+  70% {
+    counter-reset: s 36;
+  }
+  70.8333333333% {
+    counter-reset: s 35;
+  }
+  71.6666666667% {
+    counter-reset: s 34;
+  }
+  72.5% {
+    counter-reset: s 33;
+  }
+  73.3333333333% {
+    counter-reset: s 32;
+  }
+  74.1666666667% {
+    counter-reset: s 31;
+  }
+  75% {
+    counter-reset: s 30;
+  }
+  75.8333333333% {
+    counter-reset: s 29;
+  }
+  76.6666666667% {
+    counter-reset: s 28;
+  }
+  77.5% {
+    counter-reset: s 27;
+  }
+  78.3333333333% {
+    counter-reset: s 26;
+  }
+  79.1666666667% {
+    counter-reset: s 25;
+  }
+  80% {
+    counter-reset: s 24;
+  }
+  80.8333333333% {
+    counter-reset: s 23;
+  }
+  81.6666666667% {
+    counter-reset: s 22;
+  }
+  82.5% {
+    counter-reset: s 21;
+  }
+  83.3333333333% {
+    counter-reset: s 20;
+  }
+  84.1666666667% {
+    counter-reset: s 19;
+  }
+  85% {
+    counter-reset: s 18;
+  }
+  85.8333333333% {
+    counter-reset: s 17;
+  }
+  86.6666666667% {
+    counter-reset: s 16;
+  }
+  87.5% {
+    counter-reset: s 15;
+  }
+  88.3333333333% {
+    counter-reset: s 14;
+  }
+  89.1666666667% {
+    counter-reset: s 13;
+  }
+  90% {
+    counter-reset: s 12;
+  }
+  90.8333333333% {
+    counter-reset: s 11;
+  }
+  91.6666666667% {
+    counter-reset: s 10;
+  }
+  92.5% {
+    counter-reset: s 9;
+  }
+  93.3333333333% {
+    counter-reset: s 8;
+  }
+  94.1666666667% {
+    counter-reset: s 7;
+  }
+  95% {
+    counter-reset: s 6;
+  }
+  95.8333333333% {
+    counter-reset: s 5;
+  }
+  96.6666666667% {
+    counter-reset: s 4;
+  }
+  97.5% {
+    counter-reset: s 3;
+  }
+  98.3333333333% {
+    counter-reset: s 2;
+  }
+  99.1666666667% {
+    counter-reset: s 1;
+  }
+  100% {
+    counter-reset: s 0;
+  }
+}
+svg {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+[r] {
+  fill: none;
+  stroke: silver;
+}
+[r] + [r] {
+  transform: rotate(-90deg);
+  stroke-linecap: round;
+  stroke: #8A9B0F;
+  animation: arc 120s linear infinite;
+  animation-name: arc, col;
+}
+
+@keyframes arc {
+  0% {
+    stroke-dashoffset: 0px;
+  }
+}
+@keyframes col {
+  0% {
+    stroke: green;
+  }
+  25% {
+    stroke: yellow;
+  }
+  50% {
+    stroke: orange;
+  }
+  75% {
+    stroke: red;
+  }
+  100% {
+    stroke: #490A3D;
+  }
+}
+        </style>
+    </body>
+</html>
