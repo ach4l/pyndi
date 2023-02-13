@@ -1,5 +1,5 @@
 // List of Questions and Answers
-var words = ["pyndi","Joshimath","coding","mazaa","agar","nahi","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit","Dipika","Nawal","Sneha"]
+var words = ["likh","dikha","bol","bhai","bro","KGF","Pushpa","Bahubali","Badri","pyndi","Joshimath","coding","mazaa","agar","nahi","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit","Dipika","Nawal","Sneha"]
 
 
 // Get Dom Elements
@@ -20,6 +20,10 @@ var currentQuestionIndex = 0;
 var time = 120;
 var timerId;
 var score = 0;
+var aud = new Audio('correct.mp3')
+aud.preload = 'auto'
+var aud_wrong = new Audio('wrong.mp3')
+aud_wrong.preload = 'auto'
 
 // Start quiz and hide frontpage
 
@@ -119,19 +123,24 @@ myButton.onClick = function questionClick() {
           quill3.disable();
 
           if (output_list[1] == answer) {
+            aud.play()
             console.log(output_list[1])
             console.log("Sahi")
             feedbackEl.textContent = "Sahi Jawaab!";
             feedbackEl.style.color = "green";
             score = score + 5;
             scoreEl.textContent = score;
+            var length_1 = quill.getLength();
+            quill.deleteText(0, length_1);
+            quill.insertEmbed(0,'code-block', "");
             getQuestion();    
           } else {
+            aud_wrong.play()
             console.log(output_list[1])
             console.log(answer)
             console.log("Galat")
             feedbackEl.textContent = "Afsos, Galat Jawab!";
-            feedbackEl.style.color = "green";  
+            feedbackEl.style.color = "red";  
           }
           
         
