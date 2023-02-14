@@ -1,5 +1,5 @@
 // List of Questions and Answers
-var words = ["likh","dikha","bol","bhai","bro","KGF","Pushpa","Bahubali","Badri","pyndi","Joshimath","coding","mazaa","agar","nahi","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit","Dipika","Nawal","Sneha"]
+var words = ["dikha","bol","bhai","bro","KGF","Pushpa","Bahubali","Badri","pyndi","Joshimath","coding","mazaa","agar","nahi","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit","Dipika","Nawal","Sneha"]
 
 
 // Get Dom Elements
@@ -24,6 +24,12 @@ var aud = new Audio('correct.mp3')
 aud.preload = 'auto'
 var aud_wrong = new Audio('wrong.mp3')
 aud_wrong.preload = 'auto'
+var aud_small_good = new Audio('small_good.mp3')
+aud_small_good.preload = 'auto'
+var aud_good = new Audio('good.mp3')
+aud_good.preload = 'auto'
+var aud_big_good = new Audio('big_good.mp3')
+aud_big_good.preload = 'auto'
 
 // Start quiz and hide frontpage
 
@@ -129,6 +135,14 @@ myButton.onClick = function questionClick() {
             feedbackEl.textContent = "Sahi Jawaab!";
             feedbackEl.style.color = "green";
             score = score + 5;
+            
+            if (score==25){             
+              aud_small_good.play();              
+            } else if (score==50){              
+              aud_good.play();             
+            } else if (score>75){              
+              aud_big_good.play();              
+            }
             scoreEl.textContent = score;
             var length_1 = quill.getLength();
             quill.deleteText(0, length_1);
