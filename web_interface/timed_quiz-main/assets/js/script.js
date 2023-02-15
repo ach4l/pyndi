@@ -13,10 +13,18 @@ var nameEl = document.querySelector("#name");
 var feedbackEl = document.querySelector("#feedback");
 var scoreEl = document.querySelector("#score");
 var reStartBtn = document.querySelector("#restart");
+var playBtn = document.getElementById("myButton");
+var uniqueClassName = 'ql-Achal'; // What is your unique className?
+var submitBtn2 = document.querySelector("#score_submit");
+
+var sendBtn = document.querySelector('.' + uniqueClassName); // Fetch the element
+
+
 
 // Quiz's initial state
 
 var currentQuestionIndex = 0;
+var clicked = false;
 var time = 120;
 var timerId;
 var score = 0;
@@ -73,6 +81,8 @@ function getQuestion() {
   var promptEl = document.getElementById("question-words")
     promptEl.textContent = currentQuestion;
     choicesEl.innerHTML = "";
+    sendBtn.disabled = false; 
+    
     // currentQuestion.options.forEach(function(choice, i) {
     //     var choiceBtn = document.createElement("button");
     //     choiceBtn.setAttribute("value", choice);
@@ -82,6 +92,32 @@ function getQuestion() {
     // });
 }
 
+function submit_score() {
+  //var name_player = document.querySelector("#name");
+  name_player = $('#name').val();
+
+  $.post("https://ach4l.pythonanywhere.com/pyndilb",
+      {
+        contentType: 'application/json;charset=UTF-8',
+        data: {"final_score": score,
+        "name": name_player
+      },
+        dataType: 'json'         
+      },
+      function(data,status){
+        console.log(data);
+      }
+
+  // highscores.forEach(function(score) {
+  //   var liTag = document.createElement("li");
+  //   liTag.textContent = score.name + " - " + score.score;
+  //   var olEl = document.getElementById("highscores");
+  //   olEl.appendChild(liTag);
+  // });
+      
+  )}
+  
+
 
 
 
@@ -89,6 +125,7 @@ function getQuestion() {
 // Check for right answers and deduct time for wrong answer, go to next question
 
 myButton.onClick = function questionClick() {
+  sendBtn.disabled = true; 
   var promptEl = document.getElementById("question-words").textContent;
   promptEl = promptEl + '';
   var answer = promptEl.split(" ")[4];
@@ -154,12 +191,19 @@ myButton.onClick = function questionClick() {
             console.log(answer)
             console.log("Galat")
             feedbackEl.textContent = "Afsos, Galat Jawab!";
-            feedbackEl.style.color = "red";  
+            feedbackEl.style.color = "red"; 
+            sendBtn.disabled = false; 
           }
           
         
       });
+
+  
+  
+  
+      
       window.event.preventDefault();
+      
       
   // For example, get the selected text and convert it to uppercase:
   // const { index, length } = quill.selection.savedRange
@@ -168,6 +212,8 @@ myButton.onClick = function questionClick() {
   // quill.deleteText(index, length)
   // quill.insertText(index, newText)
   // quill.setSelection(index, newText.length)
+
+  
   return true
 }
 
@@ -241,7 +287,7 @@ nameEl.onkeyup = checkForEnter;
 
 // Save users' score after clicking submit
 
-submitBtn.onclick = saveHighscore;
+// submitBtn.onclick = saveHighscore;
 
 // Start quiz after clicking start quiz
 
