@@ -287,7 +287,7 @@ nameEl.onkeyup = checkForEnter;
 
 // Save users' score after clicking submit
 
-// submitBtn.onclick = saveHighscore;
+submitBtn.onclick = saveHighscore;
 
 // Start quiz after clicking start quiz
 
