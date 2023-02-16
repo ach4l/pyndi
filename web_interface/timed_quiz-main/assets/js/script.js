@@ -189,9 +189,9 @@ function submit_score() {
   
 
 
-  window.onbeforeunload = function () {
-    window.scrollTo(0, 0);
-  }
+  $(window).on('beforeunload', function() {
+    $(window).scrollTop(0);
+  });
 
 
 // Check for right answers and deduct time for wrong answer, go to next question
