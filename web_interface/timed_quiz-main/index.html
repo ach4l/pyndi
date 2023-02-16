@@ -125,19 +125,21 @@
                     <h2>Ho gaya</h2>
                     <p>Aapka score hai : <span id="score-final"></span></p>
                     <p>Apna name likhiye: <input type="text" id="name" max="3" />
-                        <a href="highscores.html">
-                        <button  href="highscores.html" id="submit-score" class="h-7 w-75 text-lg bg-blue-500 hover:bg-blue-700 text-gray-200 hover:text-yellow-500 flex items-center font-bold py-2 px-4 rounded" href="highscores.html" id="submit-score">Submit</button>
+                        
+                        <button  id="score_submit" onclick="submit_score()" class="h-7 w-75 text-lg bg-blue-500 hover:bg-blue-700 text-gray-200 hover:text-yellow-500 flex items-center font-bold py-2 px-4 rounded">Submit</button>
                       </a>
                     </p>
                     
                   </div>
                 </div>
               </div>
-              <div class="object-contain rounded overflow-hidden shadow-lg bg-gray-200 mb-2 ml-2 mr-2 border-2 border-yellow-500 justify-center">
-              
-                <h1>Highscores</h1>
-                <ol id="highscores"></ol>
-              
+              <div class="scores">
+                <a href="index.html"><button class="h-7 w-75 text-lg bg-blue-500 hover:bg-blue-700 text-gray-200 hover:text-yellow-500 flex items-center font-bold py-2 px-4 rounded">Re-Start</button></a>
+                
+      
+              </div>
+              <div id="accordion">
+  
               </div>
             </div>
 
@@ -242,6 +244,12 @@ quill3.disable();
 
         <script src="./assets/js/script.js"></script>
         <style>
+
+.card {
+padding: 1rem;
+border: 1px solid black;
+margin: 1rem;
+}
             .hide {
     display: none;
 }

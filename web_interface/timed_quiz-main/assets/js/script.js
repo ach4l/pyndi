@@ -18,6 +18,7 @@ var uniqueClassName = 'ql-Achal'; // What is your unique className?
 var submitBtn2 = document.querySelector("#score_submit");
 
 var sendBtn = document.querySelector('.' + uniqueClassName); // Fetch the element
+const container = document.getElementById('accordion');
 
 
 
@@ -106,6 +107,40 @@ function submit_score() {
       },
       function(data,status){
         console.log(data);
+        console.log(data[0]['Name'])
+        var idx = 0
+        data.forEach(function(score) {
+          console.log(score['Name']);
+          console.log(score['Score']);
+          var liTag = document.createElement("li");
+          liTag.textContent = score['Name'] + " - " + score['Score'];
+          var olEl = document.getElementById("highscores");
+          olEl.appendChild(liTag);
+          const card = document.createElement('div');
+  card.classList = 'card-body';
+
+  // Construct card content
+  const content = `
+  <div class="flex h-[10vh] w-[10vw]">
+  <div class="m-auto"> 
+    <div class="object-contain rounded overflow-hidden shadow-lg bg-gray-200 mb-2 ml-2 mr-2 border-2 border-yellow-500 justify-center">
+
+
+        <h5>${score['Name']} - ${score['Score']}</h5>
+              
+      
+      </div>
+    </div>
+  </div>
+  `;
+
+  // Append newyly created card element to the container
+  container.innerHTML += content;
+  idx=idx+1;
+        });
+
+        
+
       }
 
   // highscores.forEach(function(score) {
@@ -287,7 +322,7 @@ nameEl.onkeyup = checkForEnter;
 
 // Save users' score after clicking submit
 
-submitBtn.onclick = saveHighscore;
+// submitBtn.onclick = saveHighscore;
 
 // Start quiz after clicking start quiz
 
