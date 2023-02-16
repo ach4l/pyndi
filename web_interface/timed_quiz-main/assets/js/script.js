@@ -18,7 +18,7 @@ var uniqueClassName = 'ql-Achal'; // What is your unique className?
 var submitBtn2 = document.querySelector("#score_submit");
 
 var sendBtn = document.querySelector('.' + uniqueClassName); // Fetch the element
-const container = document.getElementById('accordion');
+
 
 
 
@@ -26,7 +26,7 @@ const container = document.getElementById('accordion');
 
 var currentQuestionIndex = 0;
 var clicked = false;
-var time = 120;
+var time = 10;
 var timerId;
 var score = 0;
 var aud = new Audio('correct.mp3')
@@ -93,6 +93,12 @@ function getQuestion() {
     // });
 }
 
+const randomEmoji = () => {
+  const emojis = ['👏', '👍', '🙌', '🤩', '🔥', '⭐️', '🏆', '💯'];
+  let randomNumber = Math.floor(Math.random() * emojis.length);
+  return emojis[randomNumber];
+};
+
 function submit_score() {
   //var name_player = document.querySelector("#name");
   name_player = $('#name').val();
@@ -112,36 +118,65 @@ function submit_score() {
         data.forEach(function(score) {
           console.log(score['Name']);
           console.log(score['Score']);
-          // var liTag = document.createElement("li");
-          // liTag.textContent = score['Name'] + " - " + score['Score'];
-          // var olEl = document.getElementById("highscores");
-          // olEl.appendChild(liTag);
+            // var liTag = document.createElement("li");
+            // liTag.textContent = score['Name'] + " - " + score['Score'];
+            // var olEl = document.getElementById("highscores");
+            // olEl.appendChild(liTag);
           const card = document.createElement('div');
   card.classList = 'card-body';
 
-  // Construct card content
-  const content = `
-  <div class="flex h-[10vh] w-[10vw]">
-  <div class="m-auto"> 
-    <div class="object-contain rounded overflow-hidden shadow-lg bg-gray-200 mb-2 ml-2 mr-2 border-2 border-yellow-500 justify-center">
 
-
-        <h5>${score['Name']} - ${score['Score']}</h5>
-              
-      
-      </div>
-    </div>
-  </div>
-  `;
-
-  // Append newyly created card element to the container
-  container.innerHTML += content;
-  idx=idx+1;
-        });
-
+  
         
 
-      }
+     
+
+
+
+
+
+
+
+
+  let newRow = document.createElement('li');
+  newRow.classList = 'c-list__item';
+  newRow.innerHTML = `
+		<div class="c-list__grid">
+			<div class="c-flag c-place u-bg--transparent">${idx+1}</div>
+			<div class="c-media">
+				<img class="c-avatar c-media__img" src="boy-icon.png" />
+				<div class="c-media__content">
+					<div class="c-media__title">${score['Name']}</div>
+					<a class="c-media__link u-text--small" href="https://instagram.com/jo_bhi_ho" target="_blank">@jo_bhi_ho</a>
+				</div>
+			</div>
+			<div class="u-text--right c-kudos">
+				<div class="u-mt--8">
+					<strong>${score['Score']}</strong> ${randomEmoji()}
+				</div>
+			</div>
+		</div>
+	`;
+  if (idx + 1 === 1) {
+    newRow.querySelector('.c-place').classList.add('u-text--dark');
+    newRow.querySelector('.c-place').classList.add('u-bg--yellow');
+    newRow.querySelector('.c-kudos').classList.add('u-text--yellow');
+  } else if (idx + 1 === 2) {
+    newRow.querySelector('.c-place').classList.add('u-text--dark');
+    newRow.querySelector('.c-place').classList.add('u-bg--teal');
+    newRow.querySelector('.c-kudos').classList.add('u-text--teal');
+  } else if (idx + 1 === 3) {
+    newRow.querySelector('.c-place').classList.add('u-text--dark');
+    newRow.querySelector('.c-place').classList.add('u-bg--orange');
+    newRow.querySelector('.c-kudos').classList.add('u-text--orange');
+  }
+  list.appendChild(newRow);
+  idx=idx+1;})}
+
+
+
+
+      )}
 
   // highscores.forEach(function(score) {
   //   var liTag = document.createElement("li");
@@ -150,7 +185,7 @@ function submit_score() {
   //   olEl.appendChild(liTag);
   // });
       
-  )}
+
   
 
 
@@ -327,4 +362,7 @@ nameEl.onkeyup = checkForEnter;
 // Start quiz after clicking start quiz
 
 startBtn.onclick = quizStart;
+
+
+
 
