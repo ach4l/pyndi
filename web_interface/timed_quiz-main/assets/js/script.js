@@ -112,10 +112,10 @@ function submit_score() {
         data.forEach(function(score) {
           console.log(score['Name']);
           console.log(score['Score']);
-          var liTag = document.createElement("li");
-          liTag.textContent = score['Name'] + " - " + score['Score'];
-          var olEl = document.getElementById("highscores");
-          olEl.appendChild(liTag);
+          // var liTag = document.createElement("li");
+          // liTag.textContent = score['Name'] + " - " + score['Score'];
+          // var olEl = document.getElementById("highscores");
+          // olEl.appendChild(liTag);
           const card = document.createElement('div');
   card.classList = 'card-body';
 
