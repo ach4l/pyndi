@@ -26,7 +26,7 @@ var sendBtn = document.querySelector('.' + uniqueClassName); // Fetch the elemen
 
 var currentQuestionIndex = 0;
 var clicked = false;
-var time = 120;
+var time = 10;
 var timerId;
 var score = 0;
 var aud = new Audio('correct.mp3')
@@ -189,9 +189,7 @@ function submit_score() {
   
 
 
-  $(window).on('beforeunload', function() {
-    $(window).scrollTop(0);
-  });
+ 
 
 
 // Check for right answers and deduct time for wrong answer, go to next question
