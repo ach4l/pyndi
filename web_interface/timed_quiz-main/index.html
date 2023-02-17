@@ -297,7 +297,23 @@ scrollToTop();
 
         <script src="./assets/js/script.js"></script>
         <style>
-
+@keyframes glowing {
+        0% {
+          background-color: #070807;
+          box-shadow: 0 0 5px #090a09;
+        }
+        50% {
+          background-color: rgba(123,22,255,0.4);
+          box-shadow: 0 0 20px #101a0d;
+        }
+        100% {
+          background-color: #7B16FF;
+          box-shadow: 0 0 5px #0a0c0a;
+        }
+      }
+      .ql-Achal {
+        animation: glowing 1000ms 5;
+      }
 
 html {
   --black: #000000;
