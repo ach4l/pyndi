@@ -26,7 +26,7 @@ var sendBtn = document.querySelector('.' + uniqueClassName); // Fetch the elemen
 
 var currentQuestionIndex = 0;
 var clicked = false;
-var time = 10;
+var time = 120;
 var timerId;
 var score = 0;
 var aud = new Audio('correct.mp3')
