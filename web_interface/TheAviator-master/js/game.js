@@ -689,8 +689,7 @@ ParticlesHolder.prototype.spawnParticles = function(pos, density, color, scale){
 }
 
 
-
-Coin = function(){
+Coin = function (){
 
   const loader = new THREE.FontLoader();
   console.log("Here")

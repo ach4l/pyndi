@@ -1,7 +1,7 @@
 // List of Questions and Answers
 var words = ["dikha","bol","bhai","bro","KGF","Pushpa","Bahubali","Badri","pyndi","Joshimath","coding","mazaa","agar","nahi","Pathaan","Ayush","kyun","hai","kaise","aur","phir","lambai","jbtk","har","Anshul","Divya","Ria","Sumit","Dipika","Nawal","Sneha"]
 
-
+var dialogues = ["Rishte mein to hum tumhare baap lagte hain","Flower samjhe kya, flower nahin fire hoon main","Kursi ki peti baandh lo. Mausam bigadne wala hai","Pathaan abhi zinda hai","Hum jahan khade hote hain, line wahin se chalu hoti hai", "Haar ke jeetne wale ko baazigar kehte hain", "Uska to na bad luck hi kharab hai", "Hows the josh?", "Baap ka Dada ka, sabka badla lega tera Faizal!","Mana nahin kiye hain, permissan leni chahiye thi", "Tumse na ho payega", "Mhari choriyan choro se kam hai kay?", "Tension lene ka nahin, sirf dene ka", "Har team ka ek hi gunda ho sakta hai, aur is team ka gunda main hoon", "Utha le re baba", "Kabhi Kabhi lagta hai apun ich bhagwaan hai","aane wala pal, jaane wala hai","picture abhi baaki hai mere dost", "Dosti ka ek usool hai madam - no sorry no thank you"]
 // Get Dom Elements
 
 var questionsEl = document.querySelector("#questions");
@@ -19,14 +19,14 @@ var submitBtn2 = document.querySelector("#score_submit");
 
 var sendBtn = document.querySelector('.' + uniqueClassName); // Fetch the element
 
-
+var editorEl = document.querySelector("#code_pnd");
 
 
 // Quiz's initial state
 
 var currentQuestionIndex = 0;
 var clicked = false;
-var time = 10;
+var time = 120;
 var timerId;
 var score = 0;
 var aud = new Audio('correct.mp3')
@@ -42,25 +42,7 @@ aud_big_good.preload = 'auto'
 
 // Start quiz and hide frontpage
 
-function insert_sample_code() {
-  url_query = "https://ach4l.pythonanywhere.com/pyndiexamples?example=print_simple"
-      $.post(url_query,
-        {
-          contentType: 'application/json;charset=UTF-8',
-          dataType: 'json'         
-        },
-        function(data,status){
-            quill.enable(true);
-            var length = quill.getLength();
-            console.log(length);
-          //   console.log(data_full);
-            quill.deleteText(0, length);
-            quill.insertEmbed(0,'code-block', "");
-            quill.insertText(0, data);           
-          
-        }); 
-      
-};
+
 
 function quizStart() {
     timerId = setInterval(clockTick, 1000);
@@ -68,21 +50,49 @@ function quizStart() {
     var landingScreenEl = document.getElementById("start-screen");
     landingScreenEl.setAttribute("class", "hide");
     questionsEl.removeAttribute("class");
-    getQuestion();
-    insert_sample_code();
+    getQuestion();    
 }
 
 // Loop through array of questions and answers and create list with buttons
 
 function getQuestion() {
-  var random_int = Math.floor(Math.random() * (words.length + 1) );
-  var current_word = words[random_int];
-  var currentQuestion = "Computer se likhao : " + current_word;
+  var list_of_prompts = ["0","0","0","0"];
+  var last_index = 0;
+  for (let i = 0; i < list_of_prompts.length; i++) {    
+    var random_int = Math.floor(Math.random() * (dialogues.length + 1) );
+    while (random_int == last_index){
+    var random_int = Math.floor(Math.random() * (dialogues.length + 1) ); 
+    }
+    last_index = random_int;
+    //console.log(random_int)
+    list_of_prompts[i] = dialogues[random_int]
+  }
+  //console.log(list_of_prompts)
+  var correct_ans_ind = Math.floor(Math.random() * (4) );
+  var correct_ans = list_of_prompts[correct_ans_ind];
+  //console.log(correct_ans)
+  var text_to_enter = "";
+  for (let i = 0; i < list_of_prompts.length; i++) {
+    text_to_enter = text_to_enter + 'line' + String(i) + " = '" + list_of_prompts[i] + "'\n";
+  }
+  console.log(text_to_enter)
+  
+
+
+
+  var currentQuestion = "Computer se likhao : " + correct_ans;
 
   var promptEl = document.getElementById("question-words")
     promptEl.textContent = currentQuestion;
     choicesEl.innerHTML = "";
     sendBtn.disabled = false; 
+    quill.enable(true);
+            var length = quill.getLength();
+            console.log(length);
+          //   console.log(data_full);
+            quill.deleteText(0, length);
+            quill.insertEmbed(0,'code-block', "");
+            quill.insertText(0, text_to_enter);    
     
     // currentQuestion.options.forEach(function(choice, i) {
     //     var choiceBtn = document.createElement("button");
@@ -112,7 +122,7 @@ function submit_score() {
   check_value = mobileCheck();
   
 
-  $.post("https://ach4l.pythonanywhere.com/pyndilb",
+  $.post("https://ach4l.pythonanywhere.com/pyndilb2",
       {
         contentType: 'application/json;charset=UTF-8',
         data: {"final_score": score,
@@ -208,7 +218,7 @@ myButton.onClick = function questionClick() {
   sendBtn.disabled = true; 
   var promptEl = document.getElementById("question-words").textContent;
   promptEl = promptEl + '';
-  var answer = promptEl.split(" ")[4];
+  var answer = promptEl.slice(21);
   console.log(answer);
   // Do whatever you want here. You could use this.getValue() or this.setValue() if you wanted.
   gtag('event', 'executed', {
@@ -244,8 +254,10 @@ myButton.onClick = function questionClick() {
           quill3.insertEmbed(7,'code-block', "");
           quill3.insertText(7, data);                
           quill3.disable();
-
-          if (output_list[1] == answer) {
+          var answer_returned = output_list[1].slice(17);
+          console.log("answer_returned");
+          console.log(answer_returned);
+          if (answer_returned == answer) {
             aud.play()
             console.log(output_list[1])
             console.log("Sahi")
@@ -257,7 +269,7 @@ myButton.onClick = function questionClick() {
               aud_small_good.play();              
             } else if (score==50){              
               aud_good.play();             
-            } else if (score>75){              
+            } else if (score==75){              
               aud_big_good.play();              
             }
             scoreEl.textContent = score;
@@ -266,9 +278,7 @@ myButton.onClick = function questionClick() {
             quill.insertEmbed(0,'code-block', "");
             getQuestion();    
           } else {
-            aud_wrong.play()
-            console.log(output_list[1])
-            console.log(answer)
+            aud_wrong.play()            
             console.log("Galat")
             feedbackEl.textContent = "Afsos, Galat Jawab!";
             feedbackEl.style.color = "red"; 
