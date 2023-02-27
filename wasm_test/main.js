@@ -53,7 +53,9 @@ async function evaluatePython() {
       import io
       sys.stdout = io.StringIO()
     `);
-    let result = pyodide.runPython(editor.getValue());
+    pyndi_code = editor.getValue();
+    pyndi_code = pyndi_code.replace("likh", "print")
+    let result = pyodide.runPython(pyndi_code);
     let stdout = pyodide.runPython("sys.stdout.getvalue()");
     addToOutput(stdout);
   } catch (err) {
